@@ -43,3 +43,10 @@ var $contentTitle = $('.content-title').html(), // 获取当前页面的标题
 			break;
 		}
 	}
+
+// 退出登录按钮
+$('.logout').on('click', function() {
+	if (confirm('确定要退出吗？')) { // 弹出对话框 是否退出
+		location.href = '../login.php';
+	}
+});

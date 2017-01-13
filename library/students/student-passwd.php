@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>我的首页</title>
+	<title>个人中心-修改密码</title>
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-passwd.css">
 </head>
 <body>
-	<?php include 'student-master.php'; ?>
+	<?php 
+		include 'student-master.php';
+	?>
 
 	<div class="content">
 		<!-- 正文内容头部 -->
 		<div class="content-header">
-			<h3 class="content-title">修改密码</h3>
+			<h3 class="content-title">修改密码</h3><small class="content-subtitle">经常更换密码更安全哟</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
 				<i class="content-breadcrumb-icon"></i>个人中心
@@ -25,9 +27,9 @@
 				<i class="frm-passwd-title-icon"></i>PASSWORD
 			</h3>
 			<input class="frm-passwd-input" type="password" name="txtOldPwd" placeholder="请输入旧密码" required>
-			<input class="frm-passwd-input frm-passwd-newpwd" type="password" name="txtNewPwd" placeholder="请输入密码" required>
+			<input class="frm-passwd-input frm-passwd-newpwd" type="password" name="txtNewPwd" placeholder="请输入密码，6-16位" required pattern="\w{6,16}">
 			<input class="frm-passwd-input frm-passwd-newagain" type="password" name="txtNewAgain" placeholder="确认密码" required>
-			<input class="frm-passwd-submit" type="submit" name="btnOk" value="提交">
+			<input class="frm-passwd-submit" type="submit" name="btnOk" value="修改">
 		</form>
 	</div>
 
@@ -36,3 +38,25 @@
 	<script type="text/javascript" src="../scripts/student-passwd.js"></script>
 </body>
 </html>
+
+<?php
+	// 点击了修改密码按钮
+	if (isset($_POST['btnOk']) && $_POST['btnOk'] == '修改') {
+		$oldPasswd = $_POST['txtOldPwd']; // 旧密码
+		$newPasswd = $_POST['txtNewPwd']; // 新密码
+
+		// 检测输入旧密码是否正确的sql语句
+		$sqlOld = 'select * from students where studentId = "'.$_SESSION['user'].'" and passwd = "'.$oldPasswd.'"';
+
+		if ($db->dataSet($sqlOld)) {
+			// 修改密码的sql语句
+			$sqlNew = 'update students set passwd = "'.$newPasswd.'" where studentId = "'.$_SESSION['user'].'"';
+
+			if ($db->singleOp($sqlNew)) {
+				echo '<script>alert("密码修改成功")</script>';
+			}
+		} else {
+			echo '<script>alert("旧密码错误")</script>';
+		}
+	}
+?>

@@ -1,13 +1,26 @@
 <!-- 顶部导航层 -->
 <div class="header-top">
 	<a class="header-top-logo" href="stu-index.php">Library</a>
+	<a class="logout" href="javascript:void(0)">退出</a>
 </div>
+<?php 
+	session_start();
+	include '../data.php';
+	$db = new DataBase(); // 数据库操作类
+
+	// 判断是否登录
+	if (!(isset($_SESSION['user']) && $_SESSION['role'] == 'student')) {
+		header('location:../login.php');
+	}
+
+	$userinfo = $db->getData('select * from students where studentId = "'.$_SESSION['user'].'"')[0]; // 获取登录用户的信息
+?>
 <header class="header">
 	<!-- 头像 角色 -->
 	<div class="header-person">
-		<img class="header-person-img" src="../imgs/header.png">
+		<img class="header-person-img" src="../<?php echo $userinfo['photo'];?>">
 		<div class="header-person-info">
-			<div class="header-person-info-name">Hello, 昵好</div>
+			<div class="header-person-info-name">Hello, <?php echo $userinfo['studentName'];?></div>
 			<div class="header-person-info-role">student</div>
 		</div>
 	</div>
@@ -29,7 +42,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="student-myinfo.php">
 							<i class="header-menu-icon"></i>
 							<span>我的资料</span>
 						</a>
@@ -41,7 +54,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="student-loginfo.php">
 							<i class="header-menu-icon"></i>
 							<span>登录日志</span>
 						</a>

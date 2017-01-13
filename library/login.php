@@ -20,14 +20,36 @@
 	include 'data.php';
 	session_start();
 	$_SESSION['user'] = '';
-	$_SESSION['passwd'] = '';
-	$_SESSION['role'] = '';
+	$_SESSION['role'] = ''; // 重新访问登录页面时，将session的值置空
 
-	var db = new DataBase();
-	if (isset($_POST['subOk']) && $_POST['subOk'] == '登录') {
-		var user = $_POST['txtUser'];
-		var passwd = $_POST['txtPasswd'];
+	$db = new DataBase(); // 数据库操作类
 
-		var sql = 'select * from students '
+	if (isset($_POST['subOk']) && $_POST['subOk'] == '登录') { // 点击登录按钮
+		$user = $_POST['txtUser'];
+		$passwd = $_POST['txtPasswd'];
+		$role = $_POST['radRole'];
+		$sql = '';
+
+		if ($role == 'student') { // 学生登录
+			$sql .= 'select * from students where studentId = "'.$user.'" and passwd = "'.$passwd.'"';
+
+			if ($db->dataSet($sql)) { // 检测是否存在
+				$_SESSION['user'] = $user;
+				$_SESSION['role'] = 'student';
+				header('location:students/student-index.php');
+			} else {
+				echo '<script>alert("登录名或密码错误")</script>';
+			}
+		} else { // 管理员登录
+			$sql .= 'select * from admin where adminId = "'.$user.'" and passwd = "'.$passwd.'"';
+
+			if ($db->dataSet($sql)) { // 检测是否存在
+				$_SESSION['user'] = $user;
+				$_SESSION['role'] = 'admin';
+				header('location:admin/admin-index.php');
+			} else {
+				echo '<script>alert("登录名或密码错误")</script>';
+			}
+		}
 	}
 ?>
