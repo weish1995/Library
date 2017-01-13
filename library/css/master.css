@@ -16,16 +16,14 @@ body {
 	background-color: #f9f9f9;
 }
 
-.header {
-	overflow: hidden;
-	width: 220px;
-	background-color: #f4f4f4;
-	box-shadow: 0 0 1px rgba(0, 0, 0, .2);
+.header-top {
+	height: 50px;
+	background-color: #3c8dbc;
 }
 
-.header-logo {
+.header-top-logo {
 	display: block;
-	width: 100%;
+	width: 221px;
 	height: 50px;
 	line-height: 50px;
 	font-size: 20px;
@@ -33,6 +31,19 @@ body {
 	text-align: center;
 	color: #fff;
 	background-color: #367fa9;
+}
+
+.header-top-logo:hover {
+	background-color: #357ca5;
+}
+
+.header {
+	float: left;
+	overflow: hidden;
+	width: 220px;
+	min-height: 600px;
+	background-color: #f4f4f4;
+	box-shadow: 0 0 1px rgba(0, 0, 0, .2);
 }
 
 .header-person {
@@ -90,10 +101,11 @@ body {
 .header-menu a {
 	display: block;
 	font-size: 13px;
-	color: #222;
+	color: #555;
 }
 
 .header-menu-cate>a {
+	position: relative;
 	box-sizing: border-box;
 	padding-left: 15px;
 	height: 47px;
@@ -107,11 +119,24 @@ body {
 	color: #777;
 }
 
-.header-menu-cate li a:hover, .header-menu-cate .active{
+.header-menu-cate li a:hover{
 	color: #111;
 }
 
-.header-menu-cate:hover, .header-menu-cate.active, .header-menu-cate.click{
+.header-menu-cate li.active a {
+	color: #111;
+}
+
+.header-menu-cate:hover>a, .header-menu-cate.click>a{
+	color: #111;
+	background-color: #f9f9f9;
+}
+
+.header-menu-cate ul {
+	display: none;
+}
+
+.header-menu-cate ul a {
 	background-color: #f9f9f9;
 }
 
@@ -124,5 +149,93 @@ body {
 }
 
 .header-menu-toggle {
-	
+    position: absolute;
+    top: 34px;
+    right: 17px;
+    width: 9px;
+    height: 14px;
+    font-family: serif;
+    font-style: normal;
+    color: #333;
+    transform: rotate(-180deg);
+}
+
+.header-menu-cate.click .header-menu-toggle {
+	top: 16px;
+	right: 0;
+	transform: rotate(90deg);
+}
+
+.content {
+	margin-left: 220px;
+}
+
+.content-header {
+	padding: 15px 15px 10px 20px;
+	background: #fbfbfb;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.content-title {
+	display: inline-block;
+	font-size: 18px;
+	font-weight: 400;
+	color: #333;
+}
+
+.content-breadcrumb {
+	display: inline-block;
+	float: right;
+	margin-top: 9px;
+	font-size: 12px;
+	color: #999;
+}
+
+.content-breadcrumb-icon {
+	display: inline-block;
+	margin-right: 4px;
+	width: 10px;
+	height: 10px;
+	background-color: #000;
+}
+
+.content-breadcrumb-span {
+	margin: 0 6px;
+}
+
+/* 统一制定表单里面的元素的样式*/
+input[type="text"], input[type="password"] {
+	display: block;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555;
+    background-color: #fff;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    outline: 0;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+	border: 1px #3c8dbc solid;
+	box-shadow: none;
+}
+
+input[type="submit"] {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 6px 12px;
+	font-family: 'Microsoft Yahei';
+	letter-spacing: 2px;
+	color: #666;
+	background-color: #fafafa;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+	cursor: pointer;
+	outline: 0;
+}
+
+input[type="submit"]:focus {
+	background-color: #f4f4f4;
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
