@@ -13,7 +13,8 @@
 	<div class="content">
 		<!-- 正文内容头部 -->
 		<div class="content-header">
-			<h3 class="content-title">修改密码</h3><small class="content-subtitle">经常更换密码更安全哟</small>
+			<h3 class="content-title">修改密码</h3>
+			<small class="content-subtitle">经常更换密码更安全哟</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
 				<i class="content-breadcrumb-icon"></i>个人中心
@@ -22,9 +23,9 @@
 			</div>
 		</div>
 
-		<form class="frm-passwd" action="" method="post">
-			<h3 class="frm-passwd-title">
-				<i class="frm-passwd-title-icon"></i>PASSWORD
+		<form class="frm-passwd wrap" action="" method="post">
+			<h3 class="frm-passwd-title wrap-title">
+				<i class="frm-passwd-title-icon wrap-title-icon"></i>PASSWORD
 			</h3>
 			<input class="frm-passwd-input" type="password" name="txtOldPwd" placeholder="请输入旧密码" required>
 			<input class="frm-passwd-input frm-passwd-newpwd" type="password" name="txtNewPwd" placeholder="请输入密码，6-16位" required pattern="\w{6,16}">

@@ -261,3 +261,96 @@ input[type="submit"]:focus {
 	background-color: #f4f4f4;
 	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
+
+/* 使用div模拟table 所有列表展示都使用该样式 */
+.mytable {
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+.mytable-th, .mytable-tr {
+	display: flex;
+	background-color: #fff;
+}
+
+.mytable-tr:nth-of-type(2n) {
+	background-color: #f3f4f5;
+}
+
+.mytable-tr:hover {
+	background-color: #d1eeee;
+}
+
+.mytable-th-td, .mytable-tr-td {
+	display: flex;
+	flex: 1;
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	height: 38px;
+	font-size: 13px;
+	text-indent: 14px;
+	align-items: center;
+	color: #333;
+}
+
+.mytable-th-td {
+	font-size: 14px;
+	font-weight: 700;
+	border-bottom: 1px solid #ddd;
+}
+
+/* 包裹层wrap */
+.wrap {
+	margin: 20px;
+	border-top: 2px solid #00c0ef;
+	border-radius: 3px;
+	padding: 15px 25px 30px;
+	background-color: #fff;
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.wrap-title {
+	margin-bottom: 25px;
+	font-family: cursive;
+	font-size: 18px;
+	font-weight: 400;
+	color: #444;
+}
+
+.wrap-title-icon {
+	display: inline-block;
+	margin-right: 5px;
+	width: 15px;
+	height: 15px;
+	background-color: #000;
+}
+
+/* 分页的默认样式 */
+.pages {
+	margin-top: 40px;
+	text-align: right;
+}
+
+.pages-op {
+	margin-left: 7px;
+	font-size: 12px;
+}
+
+.pages-op:hover {
+	background-color: #f4f4f4;
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.pages-op.disabled {
+	background-color: #ccc;
+}
+
+.pages-op.disabled:hover {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+	cursor: not-allowed;
+}
+
+.pages-loc {
+	margin-right: 5px;
+	font-size: 12px;
+}
