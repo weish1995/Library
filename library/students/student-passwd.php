@@ -3,7 +3,7 @@
 <head>
 	<title>个人中心-修改密码</title>
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
-	<link rel="stylesheet" type="text/css" href="../css/student-passwd.css">
+	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
 	<?php 

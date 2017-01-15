@@ -129,7 +129,8 @@ body {
 	color: #111;
 }
 
-.header-menu-cate:hover>a, .header-menu-cate.click>a{
+.header-menu-cate:hover>a, 
+.header-menu-cate.click>a{
 	color: #111;
 	background-color: #f9f9f9;
 }
@@ -226,7 +227,16 @@ body {
 }
 
 /* 统一制定表单里面的元素的样式*/
-input[type="text"], input[type="password"] {
+label {
+	display: block;
+	margin-bottom: 5px;
+	font-size: 12px;
+	clear: both;
+}
+
+input[type="text"], 
+input[type="password"], 
+input[type="email"] {
 	display: block;
 	border: 1px solid #ccc;
 	border-radius: 3px;
@@ -239,12 +249,22 @@ input[type="text"], input[type="password"] {
     outline: 0;
 }
 
-input[type="text"]:focus, input[type="password"]:focus {
+input[type="file"] {
+	border: 0;
+	padding: 6px 12px 6px 0;
+	font-size: 13px;
+	color: #555;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+input[type="email"]:focus {
 	border: 1px #3c8dbc solid;
 	box-shadow: none;
 }
 
-input[type="submit"], .tobutton {
+input[type="submit"], 
+.tobutton {
 	border: 1px solid #ddd;
 	border-radius: 4px;
 	padding: 6px 12px;
@@ -262,13 +282,19 @@ input[type="submit"]:focus {
 	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 
+input.disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+
 /* 使用div模拟table 所有列表展示都使用该样式 */
 .mytable {
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 }
 
-.mytable-th, .mytable-tr {
+.mytable-th, 
+.mytable-tr {
 	display: flex;
 	background-color: #fff;
 }
@@ -281,12 +307,13 @@ input[type="submit"]:focus {
 	background-color: #d1eeee;
 }
 
-.mytable-th-td, .mytable-tr-td {
+.mytable-th-td, 
+.mytable-tr-td {
 	display: flex;
 	flex: 1;
 	border-top: 1px solid #ddd;
 	border-left: 1px solid #ddd;
-	height: 38px;
+	height: 35px;
 	font-size: 13px;
 	text-indent: 14px;
 	align-items: center;

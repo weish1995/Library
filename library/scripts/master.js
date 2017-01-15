@@ -5,12 +5,16 @@ $headerMenuCate.on('click', function() {
 
 	// 检测二级菜单是否显示
 	if ($category.css('display') == 'none') {
+		$headerMenuCate.removeClass('click');
+		$headerMenuCate.find('ul').slideUp(500); // 关闭所有标签
+
 		$(this).addClass('click'); // 隐藏时 点击 则显示并加上click类
 		$category.slideDown(500);
-	} else {
-		$(this).removeClass('click'); // 显示时 点击 则隐藏并加上click类
-		$category.slideUp(500);
-	}
+	} 
+	// else {
+	// 	$(this).removeClass('click'); // 显示时 点击 则隐藏并加上click类
+	// 	$category.slideUp(500);
+	// }
 });
 
 // 定位当前页面所对应的菜单项

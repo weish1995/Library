@@ -1,0 +1,65 @@
+/* passwd.php 修改密码页面 */
+.frm-passwd {
+	display: inline-block;
+}
+
+.frm-passwd-title {
+	margin-bottom: 30px;
+}
+
+.frm-passwd-input {
+	margin-bottom: 30px;
+	width: 400px;
+	height: 30px;
+}
+
+input.frm-passwd-submit {
+	float: right;
+	border-radius: 2px;
+	padding: 8px 20px;
+}
+
+/* loginfo.php 登录日志页面 */
+.wrap-loginfo {
+	border-color: #c1c1c1;
+	width: 70%;
+	min-width: 500px;
+}
+
+/* myinfo.php 我的资料页面 */
+.wrap-myinfo {
+	display: inline-block;
+	border-color: #00a65a;
+}
+
+input.wrap-myinfo-text {
+	margin-bottom: 15px;
+	border-radius: 0;
+	width: 500px;
+}
+
+.wrap-myinfo-group {
+	float: left;
+	margin-right: 70px;
+}
+
+.wrap-myinfo-group:nth-of-type(2) {
+	margin-right: 0;
+}
+
+input.wrap-myinfo-half,
+label.wrap-myinfo-half {
+	overflow: hidden;
+	width: 200px;
+}
+
+input.wrap-myinfo-button {
+	float: right;
+	margin-top: 15px;
+	padding: 6px 20px;
+}
+
+/* student-current.php 当前借阅页面 */
+.wrap-current {
+	min-width: 500px;
+}

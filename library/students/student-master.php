@@ -69,7 +69,7 @@
 				</a>
 				<ul>
 					<li>
-						<a href="#">
+						<a href="student-current.php">
 							<i class="header-menu-icon"></i>
 							<span>当前借阅</span>
 						</a>
