@@ -36,7 +36,7 @@
 
 	<script type="text/javascript" src="../scripts/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="../scripts/master.js"></script>
-	<script type="text/javascript" src="../scripts/student-passwd.js"></script>
+	<script type="text/javascript" src="../scripts/student-contents.js"></script>
 </body>
 </html>
 

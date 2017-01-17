@@ -75,7 +75,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="student-history.php">
 							<i class="header-menu-icon"></i>
 							<span>历史借阅</span>
 						</a>
@@ -87,7 +87,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="student-overdue.php">
 							<i class="header-menu-icon"></i>
 							<span>超期信息</span>
 						</a>

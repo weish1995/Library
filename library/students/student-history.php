@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>借阅信息-当前借阅</title>
+	<title>借阅信息-历史借阅</title>
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
@@ -10,50 +10,8 @@
 		error_reporting(0); // 不显示警告
 		include 'student-master.php';
 
-		// 存在则表示 用户点击了续借 需要进行续借操作
-		if (isset($_GET['recordId']) && $_GET['recordId'] >= 1) {
-			// 获取到借阅记录
-			$sqlRec = 'select * from records where recordId = '.$_GET['recordId'];
-
-			// 数据存在才进行操作
-			if ($db->dataSet($sqlRec)) {
-				$recInfos = $db->getData($sqlRec)[0];
-				
-				// 超期的书籍不能续借
-				if (strtotime($recInfos['destine']) >= strtotime(date("y-m-d",time()))) {
-					// 预期还书时间的十天内才能续借
-					if (strtotime($recInfos['destine']) < strtotime('+10 days', time())) {
-						// 最多只能续借两次
-						if ($recInfos['renew'] < 2) {
-							// 从初始化表（default）里面获取到默认 一次借书的时长
-							$durate = $db->getData('select value_ from `default` where key_ = "时长"')[0][0];
-							
-							// 当前时间加上一次借书的时长的到续借之后的还书时间
-							$destine = date('Y-m-d', strtotime('+'.$durate.' months', time()));
-
-							// 续借的sql语句
-							$sqlRenew = 'update records set destine = "'.$destine.'", renew = '.($recInfos['renew']+1).' where recordId = '.$_GET['recordId'];
-
-							if ($db->singleOp($sqlRenew)) {
-								echo '<script>alert("续借成功")</script>';
-							} else {
-								echo '<script>alert("续借失败")</script>';
-							}
-						} else {
-							echo '<script>alert("最多只能续借两次")</script>';
-						}
-					} else {
-						echo '<script>alert("到期十天之内才能续借")</script>';
-					}
-			
-				} else {
-					echo '<script>alert("所借书籍已超期，不能续借")</script>';
-				}
-			}
-		}
-
 		// 获取当前学生的所有登录日志的总次数--用于分页
-		$counts = $db->getNum('select * from records where studentId = "'.$_SESSION['user'].'" and endDate is null');
+		$counts = $db->getNum('select * from records where studentId = "'.$_SESSION['user'].'" and endDate is not null');
 		$onePage = 16 > $counts ? $counts : 16; // 一页显示16条记录
 		$allPages = $onePage == 0 ? 1 : ceil($counts / $onePage); // 总页数
 
@@ -66,7 +24,7 @@
 
 		// 获取当前学生指定长度的登录日志信息sql
 		$logSql = 'select * from records join books on records.bookId = books.bookId join floors on floors.floorId = books.floorId '
-					.'join campus on campus.campusId = floors.campusId where records.endDate is null and studentId = "'.$_SESSION['user'].'"';
+					.'join campus on campus.campusId = floors.campusId where records.endDate is not null and studentId = "'.$_SESSION['user'].'"';
 
 		$sortStr = ''; // 存储url上的sort和sortType链接
 
@@ -94,46 +52,34 @@
 	<div class="content">
 		<!-- 正文内容头部 -->
 		<div class="content-header">
-			<h3 class="content-title">当前借阅</h3>
-			<small class="content-subtitle">已经借阅还未归还的书籍</small>
+			<h3 class="content-title">历史借阅</h3>
+			<small class="content-subtitle">借阅并已归还的书籍借阅记录</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
 				<i class="content-breadcrumb-icon"></i>借阅信息
 				</span>>
-				<span class="content-breadcrumb-span">当前借阅</span>
+				<span class="content-breadcrumb-span">历史借阅</span>
 			</div>
 		</div>
 
 		<!-- 展示登录信息 -->
 		<div class="wrap wrap-current">
 			<h3 class="wrap-title">
-				<i class="wrap-title-icon"></i>CURRENT
+				<i class="wrap-title-icon"></i>HISTORY
 			</h3>
 
 			<div class="mytable">
 				<div class="mytable-th">
-					<div class="mytable-th-td mytable-th-td-small">状态</div>
 					<div class="mytable-th-td mytable-th-td-large" alt="bookName">书籍名</div>
 					<div class="mytable-th-td mytable-th-td-large" alt="campusName">馆藏地</div>
 					<div class="mytable-th-td" alt="renew">续借次数</div>
 					<div class="mytable-th-td" alt="startDate">借阅日期</div>
-					<div class="mytable-th-td" alt="destine">应还日期</div>
-					<div class="mytable-th-td mytable-th-td-small">续借</div>
+					<div class="mytable-th-td" alt="endDate">归还日期</div>
 				</div>
 				<?php 
 					for ($i = 0; $i < count($infos); $i++) {
 				?>
 				<div class="mytable-tr">
-					<div class="mytable-tr-td mytable-th-td-small">
-						<?php
-							// 判断借书记录的当前状态
-							if (strtotime($infos[$i]['destine']) < strtotime(date("y-m-d",time()))) {
-								echo '<i class="book-state book-state-overdate">超期</i>';
-							} else {
-								echo '<i class="book-state book-state-normal">正常</i>';
-							}
-						?>
-					</div>
 					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['bookName'];?></div>
 					<div class="mytable-tr-td mytable-th-td-large">
 						<?php
@@ -146,9 +92,6 @@
 					<div class="mytable-tr-td"><?php echo $infos[$i]['renew'];?></div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['startDate'];?></div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['destine'];?></div>
-					<div class="mytable-tr-td mytable-th-td-small">
-						<a class="current-table-renew" href="student-current.php?page=<?php echo $page;?>&recordId=<?php echo $infos[$i]['recordId'];?>"></a>
-					</div>
 				</div>
 				<?php
 					}
@@ -163,16 +106,16 @@
 						echo '<a class="tobutton pages-op disabled" href="javascript:void(0)">首页</a>'
 							.'<a class="tobutton pages-op disabled" href="javascript:void(0)">上一页</a>';
 					} else {
-						echo '<a class="tobutton pages-op" href="student-current.php?page=1'.$sortStr.'">首页</a>'
-							.'<a class="tobutton pages-op" href="student-current.php?page='.($page-1).$sortStr.'">上一页</a>';
+						echo '<a class="tobutton pages-op" href="student-history.php?page=1'.$sortStr.'">首页</a>'
+							.'<a class="tobutton pages-op" href="student-history.php?page='.($page-1).$sortStr.'">上一页</a>';
 					}
 
 					if ($page == $allPages) {
 						echo '<a class="tobutton pages-op disabled" href="javascript:void(0)">下一页</a>'
 							.'<a class="tobutton pages-op disabled" href="javascript:void(0)">尾页</a>';
 					} else {
-						echo '<a class="tobutton pages-op" href="student-current.php?page='.($page+1).$sortStr.'">下一页</a>'
-							.'<a class="tobutton pages-op" href="student-current.php?page='.$allPages.$sortStr.'">尾页</a>';
+						echo '<a class="tobutton pages-op" href="student-history.php?page='.($page+1).$sortStr.'">下一页</a>'
+							.'<a class="tobutton pages-op" href="student-history.php?page='.$allPages.$sortStr.'">尾页</a>';
 					}
 				?>
 			</div>

@@ -61,5 +61,31 @@ input.wrap-myinfo-button {
 
 /* student-current.php 当前借阅页面 */
 .wrap-current {
-	min-width: 500px;
+	min-width: 600px;
+}
+
+.book-state {
+	display: inline-block;
+	margin-left: 10px;
+	height: 16px;
+	font-size: 12px;
+	font-style: normal;
+	text-indent: 18px;
+	background-repeat: no-repeat;
+}
+
+.book-state-overdate {
+	background-image: url('../imgs/red-port.gif');
+}
+
+.book-state-normal {
+	background-image: url('../imgs/green-port.gif');	
+}
+
+.current-table-renew {
+	display: inline-block;
+	margin-left: 14px;
+	width: 14px;
+	height: 13px;
+	background-image: url('../imgs/plus.jpg');
 }

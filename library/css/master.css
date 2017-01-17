@@ -310,7 +310,7 @@ input.disabled {
 .mytable-th-td, 
 .mytable-tr-td {
 	display: flex;
-	flex: 1;
+	flex: 2;
 	border-top: 1px solid #ddd;
 	border-left: 1px solid #ddd;
 	height: 35px;
@@ -321,9 +321,18 @@ input.disabled {
 }
 
 .mytable-th-td {
+	border-bottom: 1px solid #ddd;
 	font-size: 14px;
 	font-weight: 700;
-	border-bottom: 1px solid #ddd;
+	cursor: pointer;
+}
+
+.mytable-th-td-large {
+	flex: 3;
+}
+
+.mytable-th-td-small {
+	flex: 1;
 }
 
 /* 包裹层wrap */

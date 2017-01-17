@@ -6,7 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
-	<?php 
+	<?php
+		error_reporting(0); // 不显示警告
 		include 'student-master.php';
 
 		// 获取当前学生的所有登录日志的总次数--用于分页
@@ -22,7 +23,27 @@
 		}
 
 		// 获取当前学生指定长度的登录日志信息sql
-		$logSql = 'select * from loginfo, students where loginfo.studentId = "'.$_SESSION['user'].'" and students.studentId = loginfo.studentId limit '.($page - 1) * $onePage.', '.$onePage;
+		$logSql = 'select * from loginfo, students where loginfo.studentId = "'.$_SESSION['user'].'" and students.studentId = loginfo.studentId ';
+
+		$sortStr = ''; // 存储url上的sort和sortType链接
+
+		// 排序以及排序方式
+		if (isset($_GET['sort'])) {
+			$sort = $_GET['sort'];
+			$sortStr .= '&sort='.$sort;
+
+			if (isset($_GET['sortType'])) {
+				$sortType = $_GET['sortType'];
+				$sortStr .= '&sortType='.$sortType;
+			} else {
+				$sortType = '';
+			}
+
+			$logSql .= ' order by '.$sort.' '.$sortType;
+		}
+
+		// 分页限制
+		$logSql .= ' limit '.($page - 1) * $onePage.', '.$onePage;
 
 		$infos = $db->getData($logSql); // 存储登录日志信息
 	?>
@@ -48,9 +69,9 @@
 
 			<div class="mytable">
 				<div class="mytable-th">
-					<div class="mytable-th-td">用户名</div>
-					<div class="mytable-th-td">登录时间</div>
-					<div class="mytable-th-td">登录Ip地址</div>
+					<div class="mytable-th-td" alt="studentName">用户名</div>
+					<div class="mytable-th-td" alt="logDate">登录时间</div>
+					<div class="mytable-th-td" alt="logAddr">登录Ip地址</div>
 				</div>
 				<?php 
 					for ($i = 0; $i < count($infos); $i++) {
@@ -68,21 +89,21 @@
 			<!-- 分页 -->
 			<div class="pages">
 				<span class="pages-loc"><?php echo $page.' / '.$allPages;?> 页</span>
-				<?php 
+				<?php
 					if ($page == 1) {
 						echo '<a class="tobutton pages-op disabled" href="javascript:void(0)">首页</a>'
 							.'<a class="tobutton pages-op disabled" href="javascript:void(0)">上一页</a>';
 					} else {
-						echo '<a class="tobutton pages-op" href="student-loginfo.php?page=1">首页</a>'
-							.'<a class="tobutton pages-op" href="student-loginfo.php?page='.($page-1).'">上一页</a>';
+						echo '<a class="tobutton pages-op" href="student-loginfo.php?page=1'.$sortStr.'">首页</a>'
+							.'<a class="tobutton pages-op" href="student-loginfo.php?page='.($page-1).$sortStr.'">上一页</a>';
 					}
 
 					if ($page == $allPages) {
 						echo '<a class="tobutton pages-op disabled" href="javascript:void(0)">下一页</a>'
 							.'<a class="tobutton pages-op disabled" href="javascript:void(0)">尾页</a>';
 					} else {
-						echo '<a class="tobutton pages-op" href="student-loginfo.php?page='.($page+1).'">下一页</a>'
-							.'<a class="tobutton pages-op" href="student-loginfo.php?page='.$allPages.'">尾页</a>';
+						echo '<a class="tobutton pages-op" href="student-loginfo.php?page='.($page+1).$sortStr.'">下一页</a>'
+							.'<a class="tobutton pages-op" href="student-loginfo.php?page='.$allPages.$sortStr.'">尾页</a>';
 					}
 				?>
 			</div>
@@ -91,5 +112,6 @@
 
 	<script type="text/javascript" src="../scripts/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="../scripts/master.js"></script>
+	<script type="text/javascript" src="../scripts/student-contents.js"></script>
 </body>
 </html>
