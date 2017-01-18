@@ -24,7 +24,7 @@
 
 		// 获取当前学生指定长度的登录日志信息sql
 		$logSql = 'select * from records join books on records.bookId = books.bookId join floors on floors.floorId = books.floorId '
-					.'join campus on campus.campusId = floors.campusId where studentId = "'.$_SESSION['user'].'"';
+					.'join campus on campus.campusId = floors.campusId where studentId = "'.$_SESSION['user'].'" and recordId in (select recordId from records where endDate is null and "'.date('Y-m-d', time()).'" > destine union select recordId from records where endDate > destine)';
 
 		$sortStr = ''; // 存储url上的sort和sortType链接
 
@@ -63,7 +63,7 @@
 		</div>
 
 		<!-- 展示登录信息 -->
-		<div class="wrap wrap-current">
+		<div class="wrap wrap-overdue">
 			<h3 class="wrap-title">
 				<i class="wrap-title-icon"></i>OVERDUE
 			</h3>
@@ -76,7 +76,7 @@
 					<div class="mytable-th-td" alt="startDate">借阅日期</div>
 					<div class="mytable-th-td" alt="destine">应还日期</div>
 					<div class="mytable-th-td" alt="endDate">归还日期</div>
-					<div class="mytable-th-td" alt="(endDate-destine)">超期天数</div>
+					<div class="mytable-th-td">超期天数</div>
 				</div>
 				<?php 
 					for ($i = 0; $i < count($infos); $i++) {
@@ -86,9 +86,9 @@
 						<?php
 							// 判断借书记录的当前状态
 							if (!$infos[$i]['endDate']) {
-								echo '<i class="book-state book-state-overdate">未归还</i>';
+								echo '<i class="book-state book-state-red">未归还</i>';
 							} else {
-								echo '<i class="book-state book-state-normal">已归还</i>';
+								echo '<i class="book-state book-state-green">已归还</i>';
 							}
 						?>
 					</div>
@@ -105,8 +105,12 @@
 					<div class="mytable-tr-td"><?php echo $infos[$i]['destine'];?></div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['endDate'];?></div>
 					<div class="mytable-tr-td">
-						<?php 
-							$diff = ceil((strtotime($infos[$i]['destine']) - strtotime($infos[$i]['endDate'])) / 86400);
+						<?php
+							// 计算超期时间
+
+							// 如果没有归还 结束时间定为今天
+							$time = $infos[$i]['endDate'] != NULL ? strtotime($infos[$i]['endDate']) : time();
+							$diff = floor(($time - strtotime($infos[$i]['destine'])) / 86400); // 根据时间戳的差值除以一天的秒数得到时间的差值
 							echo $diff;
 						?>
 					</div>
@@ -124,16 +128,16 @@
 						echo '<a class="tobutton pages-op disabled" href="javascript:void(0)">首页</a>'
 							.'<a class="tobutton pages-op disabled" href="javascript:void(0)">上一页</a>';
 					} else {
-						echo '<a class="tobutton pages-op" href="student-current.php?page=1'.$sortStr.'">首页</a>'
-							.'<a class="tobutton pages-op" href="student-current.php?page='.($page-1).$sortStr.'">上一页</a>';
+						echo '<a class="tobutton pages-op" href="student-overdue.php?page=1'.$sortStr.'">首页</a>'
+							.'<a class="tobutton pages-op" href="student-overdue.php?page='.($page-1).$sortStr.'">上一页</a>';
 					}
 
 					if ($page == $allPages) {
 						echo '<a class="tobutton pages-op disabled" href="javascript:void(0)">下一页</a>'
 							.'<a class="tobutton pages-op disabled" href="javascript:void(0)">尾页</a>';
 					} else {
-						echo '<a class="tobutton pages-op" href="student-current.php?page='.($page+1).$sortStr.'">下一页</a>'
-							.'<a class="tobutton pages-op" href="student-current.php?page='.$allPages.$sortStr.'">尾页</a>';
+						echo '<a class="tobutton pages-op" href="student-overdue.php?page='.($page+1).$sortStr.'">下一页</a>'
+							.'<a class="tobutton pages-op" href="student-overdue.php?page='.$allPages.$sortStr.'">尾页</a>';
 					}
 				?>
 			</div>

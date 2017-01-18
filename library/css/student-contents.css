@@ -62,6 +62,7 @@ input.wrap-myinfo-button {
 /* student-current.php 当前借阅页面 */
 .wrap-current {
 	min-width: 600px;
+	border-color: #f39c12;
 }
 
 .book-state {
@@ -74,11 +75,11 @@ input.wrap-myinfo-button {
 	background-repeat: no-repeat;
 }
 
-.book-state-overdate {
+.book-state-red {
 	background-image: url('../imgs/red-port.gif');
 }
 
-.book-state-normal {
+.book-state-green {
 	background-image: url('../imgs/green-port.gif');	
 }
 
@@ -88,4 +89,76 @@ input.wrap-myinfo-button {
 	width: 14px;
 	height: 13px;
 	background-image: url('../imgs/plus.jpg');
+}
+
+.recommend-new {
+	float: right;
+	margin-top: -40px;
+	width: 32px;
+	height: 32px;
+	background-image: url('../imgs/add.gif');
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+/* student-history.php 历史借阅页面 */
+.wrap-history {
+	min-width: 600px;
+	border-color: #CDAD00;
+}
+
+/* student-order.php 历史借阅页面 */
+.wrap-order {
+	min-width: 600px;
+	border-color: #ADFF2F;
+}
+
+/* student-overdue.php 超期页面 */
+.wrap-overdue {
+	min-width: 600px;
+	border-color: #8B814C;
+}
+
+/* student-recomment.php 推荐页面 */
+.wrap-recommend {
+	min-width: 600px;
+	border-color: #7FFFD4;
+}
+
+/* student-recomall.php 推荐页面 */
+.wrap-recomall {
+	min-width: 600px;
+	border-color: #00EEEE;
+}
+
+.recomall-table-agree {
+	display: inline-block;
+	margin-left: 14px;
+	width: 16px;
+	height: 16px;
+	background-image: url('../imgs/agree.png');
+}
+
+/* student-new-recomment.php 添加推荐页面 */
+.wrap-new-recom {
+	border-color: #8B008B;
+	padding-bottom: 15px;
+	width: 630px;
+}
+
+.wrap-group {
+	margin-bottom: 15px;
+}
+
+.wrap-new-label {
+	display: inline-block;
+}
+
+.wrap-new-text {
+	width: 600px;
+	resize: none;
+}
+
+.wrap-new-button {
+	margin-left: 100px;
 }

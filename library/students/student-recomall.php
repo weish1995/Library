@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>借阅信息-历史借阅</title>
+	<title>图书推荐-电子订单推荐</title>
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
 	<?php 
-		error_reporting(0); // 不显示警告
+		// error_reporting(0); // 不显示警告
 		include 'student-master.php';
 
+		// 点赞操作
+		if (isset($_GET['recomId']) && $_GET['recomId'] >= 1) {
+			// 先检查点赞表里面是否有记录，即是否已经点赞过
+			if ($db->dataSet('select * from agrees where studentsId = "'.$_SESSION['user'].'" and recomId = '.$_GET['recomId'])) {
+				echo '<script>alert("你已经推荐过了")</script>';
+			} else {
+				// 没点赞的话就把数据库中点赞的数据+1，并将点赞操作写入数据库
+				$sqlAgree = 'insert into agrees (studentsId, recomId) values ("'.$_SESSION['user'].'", '.$_GET['recomId'].')';
+				$sqlUpdate = 'update recommends set agree = (agree+1) where recomId = '.$_GET['recomId'];
+
+				if ($db->singleOp($sqlAgree) && $db->singleOp($sqlUpdate)) {
+					echo '<script>alert("推荐成功")</script>';
+				} else {
+					echo '<script>alert("推荐失败")</script>';
+				}
+			}
+		}
+
 		// 获取当前学生的所有登录日志的总次数--用于分页
-		$counts = $db->getNum('select * from records where studentId = "'.$_SESSION['user'].'" and endDate is not null');
+		$counts = $db->getNum('select * from recommends where recomType = "未购买"');
 		$onePage = 16 > $counts ? $counts : 16; // 一页显示16条记录
 		$allPages = $onePage == 0 ? 1 : ceil($counts / $onePage); // 总页数
 
@@ -23,8 +41,7 @@
 		}
 
 		// 获取当前学生指定长度的登录日志信息sql
-		$logSql = 'select * from records join books on records.bookId = books.bookId join floors on floors.floorId = books.floorId '
-					.'join campus on campus.campusId = floors.campusId where records.endDate is not null and studentId = "'.$_SESSION['user'].'"';
+		$logSql = 'select * from recommends where recomType = "未购买"';
 
 		$sortStr = ''; // 存储url上的sort和sortType链接
 
@@ -52,46 +69,45 @@
 	<div class="content">
 		<!-- 正文内容头部 -->
 		<div class="content-header">
-			<h3 class="content-title">历史借阅</h3>
-			<small class="content-subtitle">借阅并已归还的书籍借阅记录</small>
+			<h3 class="content-title">电子订单推荐</h3>
+			<small class="content-subtitle">还没购买的所有推荐信息</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>借阅信息
+				<i class="content-breadcrumb-icon"></i>图书推荐
 				</span>>
-				<span class="content-breadcrumb-span">历史借阅</span>
+				<span class="content-breadcrumb-span">电子订单推荐</span>
 			</div>
 		</div>
 
 		<!-- 展示登录信息 -->
-		<div class="wrap wrap-history">
+		<div class="wrap wrap-recomall">
 			<h3 class="wrap-title">
-				<i class="wrap-title-icon"></i>HISTORY
+				<i class="wrap-title-icon"></i>RECOMMEND ALL
 			</h3>
 
 			<div class="mytable">
 				<div class="mytable-th">
 					<div class="mytable-th-td mytable-th-td-large" alt="bookName">书籍名</div>
-					<div class="mytable-th-td mytable-th-td-large" alt="campusName">馆藏地</div>
-					<div class="mytable-th-td" alt="renew">续借次数</div>
-					<div class="mytable-th-td" alt="startDate">借阅日期</div>
-					<div class="mytable-th-td" alt="endDate">归还日期</div>
+					<div class="mytable-th-td" alt="press">出版社</div>
+					<div class="mytable-th-td mytable-th-td-large" alt="author">作者</div>
+					<div class="mytable-th-td">理由</div>
+					<div class="mytable-th-td mytable-th-td-small" alt="agree">推荐量</div>
+					<div class="mytable-th-td mytable-th-td-small">操作</div>
 				</div>
 				<?php 
 					for ($i = 0; $i < count($infos); $i++) {
 				?>
 				<div class="mytable-tr">
 					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['bookName'];?></div>
-					<div class="mytable-tr-td mytable-th-td-large">
-						<?php
-							// 获取当前馆藏地
-							$sqlCampus = 'select campusName from campus join floors on campus.campusId = floors.campusId join books on floors.floorId = books.floorId where bookId = "'.$infos[$i]['bookId'].'"';
-
-							echo $db->getData($sqlCampus)[0][0];
-						?>
+					<div class="mytable-tr-td"><?php echo $infos[$i]['press'];?></div>
+					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['author'];?></div>
+					<div class="mytable-tr-td" alt="<?php echo $infos[$i]['reason'];?>">
+						<a class="click-detail" href="javascript:void(0)">点击查看</a>
 					</div>
-					<div class="mytable-tr-td"><?php echo $infos[$i]['renew'];?></div>
-					<div class="mytable-tr-td"><?php echo $infos[$i]['startDate'];?></div>
-					<div class="mytable-tr-td"><?php echo $infos[$i]['destine'];?></div>
+					<div class="mytable-tr-td mytable-th-td-small"><?php echo $infos[$i]['agree'];?></div>		
+					<div class="mytable-tr-td mytable-th-td-small">
+						<a class="recomall-table-agree" href="student-recomall.php?page=<?php echo $page.'&recomId='.$infos[$i]['recomId'].$sortStr;?>"></a>
+					</div>
 				</div>
 				<?php
 					}
@@ -106,16 +122,16 @@
 						echo '<a class="tobutton pages-op disabled" href="javascript:void(0)">首页</a>'
 							.'<a class="tobutton pages-op disabled" href="javascript:void(0)">上一页</a>';
 					} else {
-						echo '<a class="tobutton pages-op" href="student-history.php?page=1'.$sortStr.'">首页</a>'
-							.'<a class="tobutton pages-op" href="student-history.php?page='.($page-1).$sortStr.'">上一页</a>';
+						echo '<a class="tobutton pages-op" href="student-recomall.php?page=1'.$sortStr.'">首页</a>'
+							.'<a class="tobutton pages-op" href="student-recomall.php?page='.($page-1).$sortStr.'">上一页</a>';
 					}
 
 					if ($page == $allPages) {
 						echo '<a class="tobutton pages-op disabled" href="javascript:void(0)">下一页</a>'
 							.'<a class="tobutton pages-op disabled" href="javascript:void(0)">尾页</a>';
 					} else {
-						echo '<a class="tobutton pages-op" href="student-history.php?page='.($page+1).$sortStr.'">下一页</a>'
-							.'<a class="tobutton pages-op" href="student-history.php?page='.$allPages.$sortStr.'">尾页</a>';
+						echo '<a class="tobutton pages-op" href="student-recomall.php?page='.($page+1).$sortStr.'">下一页</a>'
+							.'<a class="tobutton pages-op" href="student-recomall.php?page='.$allPages.$sortStr.'">尾页</a>';
 					}
 				?>
 			</div>

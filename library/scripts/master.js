@@ -54,3 +54,8 @@ $('.logout').on('click', function() {
 		location.href = '../login.php';
 	}
 });
+
+// 弹出框点击关闭
+$('.pop-close').on('click', function() {
+	$('.pop-wrap').slideUp(800); // 用时800ms，收起.pop-wrap
+});

@@ -64,7 +64,51 @@ $('.mytable-th-td').on('click', function() {
 
 /* student-current.php 当前借阅页面 */
 $('.current-table-renew').on('click', function(e) {
-	if (!confirm('是否要续借?')) { // 弹出框点击的是“否”，则阻止链接跳转
+	if (!confirm('确认要续借吗?')) { // 弹出框点击的是“否”，则阻止链接跳转
 		e.preventDefault();
 	}
+});
+
+/* student-recomment.php 我的推荐页面 */
+// 查看详情
+$('.click-detail').on('click', function() {
+	var $reason = $(this).parent().attr('alt'), // 理由 存储在li，即它的父元素的alt属性里面
+		$bookName = $(this).parent().prevAll('.mytable-th-td-large').html(); // 获取书籍名
+
+	$('.pop-content-item-reson').html($reason); // 将.pop-content-item-reson的内容替换成$reason
+	$('.pop-content-item-book').html($bookName);
+
+	$('.pop-wrap').slideDown(800); // 用时800ms，展开.pop-wrap
+});
+
+/* student-recomall.php 推荐页面 */
+$('.recomall-table-agree').on('click', function(e) {
+	if (!confirm('确认要推荐吗？')) { // 弹出框点击的是“否”，则阻止链接跳转
+		e.preventDefault();
+	}
+});
+
+/* student-new-recomment.php 添加推荐页面 */
+$('.wrap-new-recom').on('submit', function() {
+	if ($('#txtReason').val().length > 500) {
+		alert('推荐理由不能超过500字');
+		return false;
+	}
+
+	if ($('#txtName').val().length > 50) {
+		alert('书籍名不能超过50字');
+		return false;
+	}
+
+	if ($('#txtAuthor').val().length > 50) {
+		alert('作者名不能超过50字');
+		return false;
+	}
+
+	if ($('#txtIbsn').val().length > 50) {
+		alert('IBSN不能超过50字');
+		return false;
+	}
+
+	return true;
 });

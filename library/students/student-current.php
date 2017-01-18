@@ -128,9 +128,9 @@
 						<?php
 							// 判断借书记录的当前状态
 							if (strtotime($infos[$i]['destine']) < strtotime(date("y-m-d",time()))) {
-								echo '<i class="book-state book-state-overdate">超期</i>';
+								echo '<i class="book-state book-state-red">超期</i>';
 							} else {
-								echo '<i class="book-state book-state-normal">正常</i>';
+								echo '<i class="book-state book-state-green">正常</i>';
 							}
 						?>
 					</div>
@@ -147,7 +147,7 @@
 					<div class="mytable-tr-td"><?php echo $infos[$i]['startDate'];?></div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['destine'];?></div>
 					<div class="mytable-tr-td mytable-th-td-small">
-						<a class="current-table-renew" href="student-current.php?page=<?php echo $page;?>&recordId=<?php echo $infos[$i]['recordId'];?>"></a>
+						<a class="current-table-renew" href="student-current.php?page=<?php echo $page.'&recordId='.$infos[$i]['recordId'].$sortStr;?>"></a>
 					</div>
 				</div>
 				<?php
