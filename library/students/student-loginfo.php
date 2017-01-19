@@ -61,7 +61,6 @@
 			</div>
 		</div>
 
-		<!-- 展示登录信息 -->
 		<div class="wrap wrap-loginfo">
 			<h3 class="wrap-title">
 				<i class="wrap-title-icon"></i>LOGINFO

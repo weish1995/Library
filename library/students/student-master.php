@@ -5,6 +5,7 @@
 </div>
 <?php 
 	session_start();
+	date_default_timezone_set('PRC');
 	include '../data.php';
 	$db = new DataBase(); // 数据库操作类
 
@@ -81,7 +82,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="student-order.php">
 							<i class="header-menu-icon"></i>
 							<span>预约记录</span>
 						</a>
@@ -93,7 +94,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="student-arrearage.php">
 							<i class="header-menu-icon"></i>
 							<span>欠款记录</span>
 						</a>

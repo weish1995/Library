@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-01-10 21:37:38
+Date: 2017-01-20 00:48:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,6 +35,7 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
+INSERT INTO `admin` VALUES ('zz', 'sxh', 'zz', '超级管理员', null, null, null);
 
 -- ----------------------------
 -- Table structure for agrees
@@ -43,18 +44,21 @@ DROP TABLE IF EXISTS `agrees`;
 CREATE TABLE `agrees` (
   `agreeId` int(11) NOT NULL AUTO_INCREMENT,
   `studentsId` varchar(100) NOT NULL,
-  `recomId` int(11) NOT NULL,
+  `recomId` int(11) NOT NULL DEFAULT '0',
   `memo` text,
   PRIMARY KEY (`agreeId`),
   KEY `cxv` (`studentsId`),
   KEY `ccc` (`recomId`),
   CONSTRAINT `ccc` FOREIGN KEY (`recomId`) REFERENCES `recommends` (`recomId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `cxv` FOREIGN KEY (`studentsId`) REFERENCES `students` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of agrees
 -- ----------------------------
+INSERT INTO `agrees` VALUES ('1', '95827', '1', null);
+INSERT INTO `agrees` VALUES ('2', '95108', '1', null);
+INSERT INTO `agrees` VALUES ('3', '95108', '5', null);
 
 -- ----------------------------
 -- Table structure for books
@@ -95,6 +99,7 @@ CREATE TABLE `books` (
 -- ----------------------------
 -- Records of books
 -- ----------------------------
+INSERT INTO `books` VALUES ('t123', '图解CSS3', '大漠', '机械工业出版社', '2014-01-01', '10000', '中文', '978-7-111-46920-9', '79', null, null, null, null, null, null, '1', '1', '35架', null, '2017-01-15', 'zz', null);
 
 -- ----------------------------
 -- Table structure for campus
@@ -105,11 +110,13 @@ CREATE TABLE `campus` (
   `campusName` varchar(100) NOT NULL,
   `memo` text,
   PRIMARY KEY (`campusId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of campus
 -- ----------------------------
+INSERT INTO `campus` VALUES ('1', '花溪校区', null);
+INSERT INTO `campus` VALUES ('2', '两江校区', null);
 
 -- ----------------------------
 -- Table structure for category
@@ -120,11 +127,13 @@ CREATE TABLE `category` (
   `cateName` varchar(100) NOT NULL,
   `memo` text,
   PRIMARY KEY (`cateId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
+INSERT INTO `category` VALUES ('1', '计算机类', null);
+INSERT INTO `category` VALUES ('2', '数学类', null);
 
 -- ----------------------------
 -- Table structure for default
@@ -138,6 +147,8 @@ CREATE TABLE `default` (
 -- ----------------------------
 -- Records of default
 -- ----------------------------
+INSERT INTO `default` VALUES ('时长', '1');
+INSERT INTO `default` VALUES ('超期单价', '0.1');
 
 -- ----------------------------
 -- Table structure for floors
@@ -152,11 +163,12 @@ CREATE TABLE `floors` (
   PRIMARY KEY (`floorId`),
   KEY `qwe` (`campusId`),
   CONSTRAINT `qwe` FOREIGN KEY (`campusId`) REFERENCES `campus` (`campusId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of floors
 -- ----------------------------
+INSERT INTO `floors` VALUES ('1', '一楼', '50', '1', null);
 
 -- ----------------------------
 -- Table structure for keyvalues
@@ -182,16 +194,25 @@ DROP TABLE IF EXISTS `loginfo`;
 CREATE TABLE `loginfo` (
   `logId` int(11) NOT NULL AUTO_INCREMENT,
   `studentId` varchar(100) NOT NULL,
-  `logDate` date NOT NULL,
+  `logDate` datetime NOT NULL,
   `logAddr` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`logId`),
   KEY `asdasd` (`studentId`),
   CONSTRAINT `asdasd` FOREIGN KEY (`studentId`) REFERENCES `students` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of loginfo
 -- ----------------------------
+INSERT INTO `loginfo` VALUES ('24', '95827', '2017-01-19 00:00:00', '');
+INSERT INTO `loginfo` VALUES ('25', '95827', '2017-01-19 17:04:50', '');
+INSERT INTO `loginfo` VALUES ('26', '95827', '2017-01-19 17:05:25', '');
+INSERT INTO `loginfo` VALUES ('27', '95827', '2017-01-19 17:06:51', '');
+INSERT INTO `loginfo` VALUES ('28', '95827', '2017-01-20 00:08:19', '');
+INSERT INTO `loginfo` VALUES ('29', '95827', '2017-01-20 00:43:54', '');
+INSERT INTO `loginfo` VALUES ('30', '95827', '2017-01-20 00:44:53', '');
+INSERT INTO `loginfo` VALUES ('31', '95827', '2017-01-20 00:45:33', '');
+INSERT INTO `loginfo` VALUES ('32', '95827', '2017-01-20 00:46:11', '');
 
 -- ----------------------------
 -- Table structure for news
@@ -244,11 +265,13 @@ CREATE TABLE `orders` (
   KEY `xc` (`bookId`),
   CONSTRAINT `ddd` FOREIGN KEY (`studentsId`) REFERENCES `students` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `xc` FOREIGN KEY (`bookId`) REFERENCES `books` (`bookId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
+INSERT INTO `orders` VALUES ('1', '95827', 't123', '2017-01-15', '已取消', null);
+INSERT INTO `orders` VALUES ('2', '95827', 't123', '2017-01-14', '待生效', null);
 
 -- ----------------------------
 -- Table structure for owe
@@ -256,22 +279,22 @@ CREATE TABLE `orders` (
 DROP TABLE IF EXISTS `owe`;
 CREATE TABLE `owe` (
   `oweId` int(11) NOT NULL AUTO_INCREMENT,
-  `studentId` varchar(100) NOT NULL,
-  `bookId` varchar(100) NOT NULL,
+  `recordId` int(100) NOT NULL,
   `season` text NOT NULL,
   `oweMoney` float NOT NULL,
   `repay` float NOT NULL,
+  `oweDate` date NOT NULL,
   `memo` text,
   PRIMARY KEY (`oweId`),
-  KEY `ds` (`studentId`),
-  KEY `asdsa` (`bookId`),
-  CONSTRAINT `asdsa` FOREIGN KEY (`bookId`) REFERENCES `books` (`bookId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ds` FOREIGN KEY (`studentId`) REFERENCES `students` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `asdasdasd` (`recordId`),
+  CONSTRAINT `asdasdasd` FOREIGN KEY (`recordId`) REFERENCES `records` (`recordId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of owe
 -- ----------------------------
+INSERT INTO `owe` VALUES ('6', '6', '所借书籍超期', '0.5', '0.5', '0000-00-00', null);
+INSERT INTO `owe` VALUES ('7', '9', '所借书籍超期', '0.1', '0.1', '0000-00-00', null);
 
 -- ----------------------------
 -- Table structure for recommends
@@ -285,6 +308,7 @@ CREATE TABLE `recommends` (
   `language` varchar(100) DEFAULT NULL,
   `ibsn` varchar(100) NOT NULL,
   `reason` text NOT NULL,
+  `press` varchar(100) DEFAULT NULL,
   `recomDate` date NOT NULL,
   `agree` int(11) NOT NULL,
   `recomType` varchar(255) NOT NULL,
@@ -292,11 +316,15 @@ CREATE TABLE `recommends` (
   PRIMARY KEY (`recomId`),
   KEY `fa` (`studentId`),
   CONSTRAINT `fa` FOREIGN KEY (`studentId`) REFERENCES `students` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of recommends
 -- ----------------------------
+INSERT INTO `recommends` VALUES ('1', '95827', 'javascript从入门到放弃', '雷迪嘎嘎', '英文', '123-456-789-123', '这这本书啊非常的好这本书啊非常的好本书啊非常的这这本书啊非常的好这本书啊非常的好本书啊非常的好这这本书啊非常的好这本书啊非常的好本书啊非常的好好', '人民出版社', '2017-01-18', '2', '未购买', null);
+INSERT INTO `recommends` VALUES ('3', '95827', '浅谈css', '泵下卡拉卡', '中文', '456-14231-132', '这这本书啊非常的好这本书啊非常的好本书啊非常的这这本书啊非常的好这本书啊非常的好本书啊非常的好这这本书啊非常的好这本书啊非常的好本书啊非常的好好', '上海出版社', '2017-01-17', '0', '已购买', null);
+INSERT INTO `recommends` VALUES ('4', '95827', 'javascript从入门到放弃', '雷迪嘎嘎', '英文', '123-456-789-123', '这这本书啊非常的好这本书啊非常的好本书啊非常的这这本书啊非常的好这本书啊非常的好本书啊非常的好这这本书啊非常的好这本书啊非常的好本书啊非常的好好', '人民出版社', '2017-01-18', '0', '未购买', '');
+INSERT INTO `recommends` VALUES ('5', '95108', '红楼梦', '施耐庵', null, '1123-45664-213', '去玩儿退欧浦自行车VB你们爱上对方过后就哭了', '北京出版社', '2017-01-18', '1', '未购买', null);
 
 -- ----------------------------
 -- Table structure for records
@@ -307,19 +335,26 @@ CREATE TABLE `records` (
   `studentId` varchar(100) NOT NULL,
   `bookId` varchar(100) NOT NULL,
   `startDate` date NOT NULL,
+  `destine` date NOT NULL,
   `endDate` date DEFAULT NULL,
-  `orverdu` int(11) DEFAULT NULL,
+  `renew` int(11) DEFAULT '0',
   `memo` text,
   PRIMARY KEY (`recordId`),
   KEY `c` (`studentId`),
   KEY `cc` (`bookId`),
   CONSTRAINT `c` FOREIGN KEY (`studentId`) REFERENCES `students` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `cc` FOREIGN KEY (`bookId`) REFERENCES `books` (`bookId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of records
 -- ----------------------------
+INSERT INTO `records` VALUES ('3', '95827', 't123', '2016-12-15', '2017-01-01', null, '1', null);
+INSERT INTO `records` VALUES ('4', '95827', 't123', '2017-01-12', '2017-02-17', null, '1', null);
+INSERT INTO `records` VALUES ('5', '95827', 't123', '2016-12-01', '2017-01-17', '2017-01-16', '1', null);
+INSERT INTO `records` VALUES ('6', '95827', 't123', '2016-11-24', '2017-01-12', '2017-01-17', '2', null);
+INSERT INTO `records` VALUES ('9', '95827', 't123', '2016-12-22', '2017-01-17', '2017-01-18', '2', null);
+INSERT INTO `records` VALUES ('10', '95108', 't123', '2017-01-19', '2017-01-19', '2017-01-19', '0', null);
 
 -- ----------------------------
 -- Table structure for students
@@ -330,7 +365,11 @@ CREATE TABLE `students` (
   `studentName` varchar(100) NOT NULL,
   `passwd` varchar(100) NOT NULL,
   `photo` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `qq` varchar(100) DEFAULT NULL,
   `tel` varchar(100) DEFAULT NULL,
+  `money` float NOT NULL DEFAULT '0',
   `memo` text,
   PRIMARY KEY (`studentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -338,3 +377,5 @@ CREATE TABLE `students` (
 -- ----------------------------
 -- Records of students
 -- ----------------------------
+INSERT INTO `students` VALUES ('95108', '崽崽', '123456', 'imgs/header.png', null, null, null, null, '0', null);
+INSERT INTO `students` VALUES ('95827', '昵好', '123456', 'imgs/h2.png', '1607074855@qq.com', '重庆理工大学', '1607074855', '15310274364', '0', null);

@@ -112,3 +112,10 @@ $('.wrap-new-recom').on('submit', function() {
 
 	return true;
 });
+
+/* student-order.php 预约记录页面 */
+$('.order-table-cancel').on('click', function(e) {
+	if (!confirm('确认要取消预约吗?')) { // 弹出框点击的是“否”，则阻止链接跳转
+		e.preventDefault();
+	}
+});
