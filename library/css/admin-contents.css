@@ -1,0 +1,44 @@
+/* admin-passwd.php 修改密码页面 */
+.frm-passwd {
+	display: inline-block;
+}
+
+.frm-passwd-title {
+	margin-bottom: 30px;
+}
+
+.frm-passwd-input {
+	margin-bottom: 30px;
+	width: 400px;
+	height: 30px;
+}
+
+input.frm-passwd-submit {
+	float: right;
+	border-radius: 2px;
+	padding: 8px 20px;
+}
+
+/* admin-default.php 默认值设置页面 */
+.frm-default {
+	display: inline-block;
+	width: 400px;
+	font-size: 12px;
+}
+
+.frm-default-label {
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.frm-default-text {
+	display: inline-block !important;
+	margin-right: 5px;
+	width: 300px;
+}
+
+.frm-default-submit {
+    display: block;
+    margin-top: 30px;
+    margin-left: 270px;
+}

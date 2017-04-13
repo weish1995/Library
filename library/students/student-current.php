@@ -7,7 +7,7 @@
 </head>
 <body>
 	<?php 
-		error_reporting(0); // 不显示警告
+		// error_reporting(0); // 不显示警告
 		include 'student-master.php';
 
 		// 存在则表示 用户点击了续借 需要进行续借操作
@@ -48,6 +48,24 @@
 			
 				} else {
 					echo '<script>alert("所借书籍已超期，不能续借")</script>';
+				}
+			}
+		}
+
+		// 超链接里面包含了 returnId 则表示 用户点击了 还书按钮
+		if (isset($_GET['returnId']) && $_GET['returnId'] >= 1) {
+			$sqlIsNot = 'select * from records where recordId = '.$_GET['returnId'].' and endDate is not NULL and studentId = "'.$_SESSION['user'].'"'; // 用于检测该书是否已经被归还
+			
+			$sqlIs = 'select * from records where recordId = '.$_GET['returnId'].' and studentId = "'.$_SESSION['user'].'"';
+
+			// 该书没有被归还并且借书记录存在
+			if (!$db->dataSet($sqlIsNot) && $db->dataSet($sqlIs)) {
+				$sqlReturn = 'update records set endDate = "'.date("y-m-d",time()).'" where recordId = '.$_GET['returnId']; // 用于还书的sql
+
+				if ($db->singleOp($sqlReturn)) {
+					echo '<script>alert("还书成功")</script>';
+				} else {
+					echo '<script>alert("还书失败")</script>';
 				}
 			}
 		}
@@ -118,6 +136,7 @@
 					<div class="mytable-th-td" alt="startDate">借阅日期</div>
 					<div class="mytable-th-td" alt="destine">应还日期</div>
 					<div class="mytable-th-td mytable-th-td-small">续借</div>
+					<div class="mytable-th-td mytable-th-td-small">还书</div>
 				</div>
 				<?php 
 					for ($i = 0; $i < count($infos); $i++) {
@@ -147,6 +166,9 @@
 					<div class="mytable-tr-td"><?php echo $infos[$i]['destine'];?></div>
 					<div class="mytable-tr-td mytable-th-td-small">
 						<a class="current-table-renew" href="student-current.php?page=<?php echo $page.'&recordId='.$infos[$i]['recordId'].$sortStr;?>"></a>
+					</div>
+					<div class="mytable-th-td mytable-th-td-small">
+						<a class="current-table-return" href="student-current.php?page=<?php echo $page.'&returnId='.$infos[$i]['recordId'].$sortStr;?>"></a>
 					</div>
 				</div>
 				<?php

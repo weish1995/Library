@@ -1,11 +1,10 @@
 <!-- 顶部导航层 -->
 <div class="header-top">
-	<a class="header-top-logo" href="stu-index.php">Library</a>
+	<a class="header-top-logo" href="student-index.php">Library</a>
 	<a class="logout" href="javascript:void(0)">退出</a>
 </div>
 <?php 
 	session_start();
-	date_default_timezone_set('PRC');
 	include '../data.php';
 	$db = new DataBase(); // 数据库操作类
 

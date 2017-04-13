@@ -69,6 +69,12 @@ $('.current-table-renew').on('click', function(e) {
 	}
 });
 
+$('.current-table-return').on('click', function(e) {
+	if (!confirm('确认要还书吗?')) { // 弹出框点击的是“否”，则阻止链接跳转
+		e.preventDefault();
+	}
+});
+
 /* student-recomment.php 我的推荐页面 */
 // 查看详情
 $('.click-detail').on('click', function() {

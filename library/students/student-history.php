@@ -10,7 +10,7 @@
 		error_reporting(0); // 不显示警告
 		include 'student-master.php';
 
-		// 获取当前学生的所有登录日志的总次数--用于分页
+		// 获取当前历史借阅信息总次数--用于分页
 		$counts = $db->getNum('select * from records where studentId = "'.$_SESSION['user'].'" and endDate is not null');
 		$onePage = 16 > $counts ? $counts : 16; // 一页显示16条记录
 		$allPages = $onePage == 0 ? 1 : ceil($counts / $onePage); // 总页数
@@ -22,7 +22,7 @@
 			$page = 1; // 未传参则默认是首页
 		}
 
-		// 获取当前学生指定长度的登录日志信息sql
+		// 获取当前历史借阅信息
 		$logSql = 'select * from records join books on records.bookId = books.bookId join floors on floors.floorId = books.floorId '
 					.'join campus on campus.campusId = floors.campusId where records.endDate is not null and studentId = "'.$_SESSION['user'].'"';
 
@@ -90,7 +90,7 @@
 					</div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['renew'];?></div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['startDate'];?></div>
-					<div class="mytable-tr-td"><?php echo $infos[$i]['destine'];?></div>
+					<div class="mytable-tr-td"><?php echo $infos[$i]['endDate'];?></div>
 				</div>
 				<?php
 					}

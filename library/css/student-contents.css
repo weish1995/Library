@@ -99,6 +99,15 @@ input.wrap-myinfo-button {
 	background-image: url('../imgs/plus.jpg');
 }
 
+.current-table-return {
+	display: inline-block;
+	margin-left: 14px;
+	width: 18px;
+	height: 13px;
+	background-image: url('../imgs/return.jpg');
+	background-size: cover;
+}
+
 .recommend-new {
 	float: right;
 	margin-top: -40px;

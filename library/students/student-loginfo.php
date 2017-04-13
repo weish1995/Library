@@ -12,7 +12,7 @@
 
 		// 获取当前学生的所有登录日志的总次数--用于分页
 		$counts = $db->getNum('select * from loginfo where studentId = "'.$_SESSION['user'].'"');
-		$onePage = 16 > $counts ? $counts : 16; // 一页显示16条记录
+		$onePage = 3 > $counts ? $counts : 3; // 一页显示16条记录
 		$allPages = ceil($counts / $onePage); // 总页数
 
 		// 获取传入的参数page 当前页

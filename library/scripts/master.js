@@ -19,11 +19,23 @@ $headerMenuCate.on('click', function() {
 
 // 定位当前页面所对应的菜单项
 var $contentTitle = $('.content-title').html(), // 获取当前页面的标题
-	$menus = [
-		['我的首页', '我的资料', '修改密码', '登录日志'], 
-		['当前借阅', '历史借阅', '预约记录', '超期信息', '欠款记录'],
-		['我的推荐', '电子订单推荐']
-	]; // 菜单信息
+	$menus = []; // 菜单信息
+
+	// 获取当前模板的菜单结构
+	var $cateMenus = $('.header-menu-cate'); // 一级菜单
+
+	for (var $i = 0; $i < $cateMenus.length; $i++) {
+		var $cateLi = $($cateMenus[$i]).find('li span'), // 查找到当前一级菜单下的二级菜单
+			$cateArr = [];
+
+		// 依次将二级菜单的数据添加到$cateArr数组里面
+		for (var $j = 0; $j < $cateLi.length; $j++) {
+			$cateArr.push($($cateLi[$j]).html()); // push函数 - 在数组的尾部添加
+		}
+
+		// 将二级菜单数组添加到$menus里面
+		$menus.push($cateArr);
+	}
 
 	/* 通过使用两次循环找到当前页面在菜单中的位置
 	* 第一次循环找到当前页面在一级菜单中的index
