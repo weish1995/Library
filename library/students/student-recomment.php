@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>图书推荐-我的推荐</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/form.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
@@ -55,7 +57,7 @@
 			<small class="content-subtitle">向图书馆推荐购买的书籍记录</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>图书推荐
+				<i class="content-breadcrumb-icon header-menu-icon-comm"></i>图书推荐
 				</span>>
 				<span class="content-breadcrumb-span">我的推荐</span>
 			</div>
@@ -63,19 +65,31 @@
 
 		<div class="wrap wrap-recommend">
 			<h3 class="wrap-title">
-				<i class="wrap-title-icon"></i>RECOMMEND
+				<i class="wrap-title-icon header-menu-icon-mycomm"></i>RECOMMEND
 			</h3>
 
 			<a class="recommend-new" href="student-new-recomment.php" title="添加" alt="添加"></a>
 
 			<div class="mytable">
 				<div class="mytable-th">
-					<div class="mytable-th-td mytable-th-td-large" alt="bookName">书籍名</div>
-					<div class="mytable-th-td" alt="ibsn">ISBN</div>
-					<div class="mytable-th-td" alt="author">作者</div>
-					<div class="mytable-th-td" alt="press">出版社</div>
-					<div class="mytable-th-td" alt="recomType">状态</div>
-					<div class="mytable-th-td" alt="recomDate">推荐日期</div>
+					<div class="mytable-th-td mytable-th-td-large" alt="bookName">
+						书籍名<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="ibsn">
+						ISBN<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="author">
+						作者<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="press">
+						出版社<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="recomType">
+						状态<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="recomDate">
+						推荐日期<i class="mytable-th-td-icon"></i>
+					</div>
 					<div class="mytable-th-td">理由</div>
 				</div>
 				<?php 

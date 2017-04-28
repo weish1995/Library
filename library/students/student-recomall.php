@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>图书推荐-电子订单推荐</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/form.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
@@ -63,7 +65,7 @@
 		// 分页限制
 		$logSql .= ' limit '.($page - 1) * $onePage.', '.$onePage;
 
-		$infos = $db->getData($logSql); // 存储登录日志信息
+		$infos = $db->getData($logSql); // 存储信息
 	?>
 
 	<div class="content">
@@ -73,7 +75,7 @@
 			<small class="content-subtitle">还没购买的所有推荐信息</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>图书推荐
+				<i class="content-breadcrumb-icon header-menu-icon-comm"></i>图书推荐
 				</span>>
 				<span class="content-breadcrumb-span">电子订单推荐</span>
 			</div>
@@ -81,17 +83,27 @@
 
 		<div class="wrap wrap-recomall">
 			<h3 class="wrap-title">
-				<i class="wrap-title-icon"></i>RECOMMEND ALL
+				<i class="wrap-title-icon header-menu-icon-allcomm"></i>RECOMMEND ALL
 			</h3>
 
 			<div class="mytable">
 				<div class="mytable-th">
-					<div class="mytable-th-td mytable-th-td-large" alt="bookName">书籍名</div>
-					<div class="mytable-th-td" alt="press">出版社</div>
-					<div class="mytable-th-td mytable-th-td-large" alt="author">作者</div>
+					<div class="mytable-th-td mytable-th-td-large" alt="bookName">
+						书籍名<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="press">
+						出版社<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td mytable-th-td-large" alt="author">
+						作者<i class="mytable-th-td-icon"></i>
+					</div>
 					<div class="mytable-th-td">理由</div>
-					<div class="mytable-th-td mytable-th-td-small" alt="agree">推荐量</div>
-					<div class="mytable-th-td mytable-th-td-small">操作</div>
+					<div class="mytable-th-td mytable-th-td-small" alt="agree">
+						推荐量<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td mytable-th-td-small">
+						操作
+					</div>
 				</div>
 				<?php 
 					for ($i = 0; $i < count($infos); $i++) {

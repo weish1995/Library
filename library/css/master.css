@@ -145,10 +145,112 @@ body {
 
 .header-menu-icon {
 	display: inline-block;
+	position: relative;
+	top: 1px;
 	margin-right: 3px;
-    width: 10px;
-    height: 10px;
-    background: #000;
+    width: 14px;
+    height: 14px;
+    background-size: cover;
+}
+
+.header-menu-icon-home {
+	background-image: url("../imgs/icon-home.png");
+}
+
+.header-menu-icon-person {
+	background-image: url("../imgs/icon-person.png");
+}
+
+.header-menu-icon-option {
+	background-image: url("../imgs/icon-option.png");
+}
+
+.header-menu-icon-lock {
+	background-image: url("../imgs/icon-lock.png");
+}
+
+.header-menu-icon-text {
+	background-image: url("../imgs/icon-text.png");
+}
+
+.header-menu-icon-circle {
+	background-image: url("../imgs/icon-circle.png");
+}
+
+.header-menu-icon-current {
+	background-image: url("../imgs/icon-current.png");
+}
+
+.header-menu-icon-history {
+	background-image: url("../imgs/icon-history.png");
+}
+
+.header-menu-icon-order {
+	background-image: url("../imgs/icon-order.png");
+}
+
+.header-menu-icon-overdue {
+	background-image: url("../imgs/icon-overdue.png");
+}
+
+.header-menu-icon-money {
+	background-image: url("../imgs/icon-money.png");
+}
+
+.header-menu-icon-comm {
+	background-image: url("../imgs/icon-comm.png");
+}
+
+.header-menu-icon-mycomm {
+	background-image: url("../imgs/icon-my-comm.png");
+}
+
+.header-menu-icon-allcomm {
+	background-image: url("../imgs/icon-all-comm.png");
+}
+
+.header-menu-icon-add {
+	background-image: url("../imgs/icon-add.png");
+}
+
+.header-menu-icon-set {
+	background-image: url("../imgs/icon-set.png");
+}
+
+.header-menu-icon-people {
+	background-image: url("../imgs/icon-people.png");
+}
+
+.header-menu-icon-edit {
+	background-image: url("../imgs/icon-edit.png");
+}
+
+.header-menu-icon-desc {
+	background-image: url("../imgs/icon-desc.png");
+}
+
+.header-menu-icon-download {
+	background-image: url("../imgs/icon-download.png");
+}
+
+.header-menu-icon-email {
+	background-image: url("../imgs/icon-email.png");
+}
+
+.header-menu-icon-link {
+	background-image: url("../imgs/icon-link.png");
+}
+
+.header-menu-icon-book {
+	background-image: url("../imgs/icon-book.png");
+}
+
+.header-menu-icon-eachbook {
+	background-image: url("../imgs/icon-eachbook.png");
+}
+
+.header-menu-icon-cate {
+	background-image: url("../imgs/icon-cate.png");
 }
 
 .header-menu-toggle {
@@ -170,6 +272,7 @@ body {
 }
 
 .content {
+	overflow: hidden;
 	margin-top: -21px;
 	margin-left: 220px;
 }
@@ -207,7 +310,7 @@ body {
 	margin-right: 4px;
 	width: 10px;
 	height: 10px;
-	background-color: #000;
+	background-size: cover;
 }
 
 .content-breadcrumb-span {
@@ -224,100 +327,6 @@ body {
 .logout:hover {
 	color: #f6f6f6;
 	background-color: #367faa;
-}
-
-/* 统一制定表单里面的元素的样式*/
-label {
-	display: block;
-	margin-bottom: 5px;
-	font-size: 12px;
-	clear: both;
-}
-
-input[type="text"], 
-input[type="password"], 
-input[type="email"],
-input[type="number"],
-textarea {
-	display: block;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.428571429;
-    color: #555;
-    background-color: #fff;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-    outline: 0;
-}
-
-input[type="file"] {
-	border: 0;
-	padding: 6px 12px 6px 0;
-	font-size: 13px;
-	color: #555;
-}
-
-input[type="text"]:focus, 
-input[type="password"]:focus, 
-input[type="email"]:focus,
-input[type="number"]:focus,
-textarea:focus {
-	border: 1px #3c8dbc solid;
-	box-shadow: none;
-}
-
-input[type="submit"], 
-input[type="reset"],
-.tobutton {
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	padding: 6px 12px;
-	font-family: 'Microsoft Yahei';
-	letter-spacing: 2px;
-	color: #666;
-	background-color: #fafafa;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-	cursor: pointer;
-	outline: 0;
-}
-
-input[type="submit"]:focus, 
-input[type="reset"]:focus {
-	background-color: #f4f4f4;
-	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
-
-input.disabled {
-	background-color: #ccc;
-	cursor: not-allowed;
-}
-
-select {
-	display: block;
-    width: 100%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.428571429;
-    color: #555;
-    vertical-align: middle;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
-
-option {
-    font-weight: normal;
-    display: block;
-    white-space: pre;
-    min-height: 1.2em;
-    padding: 0px 2px 1px;
 }
 
 /* 必填 */
@@ -351,18 +360,47 @@ option {
 	flex: 2;
 	border-top: 1px solid #ddd;
 	border-left: 1px solid #ddd;
+	padding: 0 1px;
 	min-height: 35px;
 	font-size: 13px;
 	text-indent: 14px;
 	align-items: center;
 	color: #333;
+	word-break: break-all;
 }
 
 .mytable-th-td {
+	position: relative;
 	border-bottom: 1px solid #ddd;
 	font-size: 14px;
 	font-weight: 700;
 	cursor: pointer;
+}
+
+.mytable a {
+	font-size: 13px;
+	color: #333;
+}
+
+.mytable a:hover {
+	text-decoration: underline;
+}
+
+.mytable-tr-td-img {
+	display: inline-block;
+	margin: 2px 0 2px 14px;
+	width: 60px;
+	max-height: 60px;
+}
+
+.mytable-th-td-icon {
+	position: absolute;
+	top: 50%;
+	right: 14px;
+	margin-top: -7px;
+	width: 14px;
+	height: 14px;
+	background-image: url("../imgs/sort.png");
 }
 
 .mytable-th-td-large {
@@ -406,37 +444,7 @@ option {
 	margin-right: 5px;
 	width: 15px;
 	height: 15px;
-	background-color: #000;
-}
-
-/* 分页的默认样式 */
-.pages {
-	margin-top: 40px;
-	text-align: right;
-}
-
-.pages-op {
-	margin-left: 7px;
-	font-size: 12px;
-}
-
-.pages-op:hover {
-	background-color: #f4f4f4;
-	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-}
-
-.pages-op.disabled {
-	background-color: #ccc;
-}
-
-.pages-op.disabled:hover {
-	box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-	cursor: not-allowed;
-}
-
-.pages-loc {
-	margin-right: 5px;
-	font-size: 12px;
+	background-size: cover;
 }
 
 /* 弹出层 */
@@ -487,3 +495,9 @@ option {
 	font-size: 13px;
 	font-weight: 400;
 }
+
+/* 富文本控件 */
+/*.container {
+	width: 90%;
+	height: 00px;
+}*/

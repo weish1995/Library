@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>个人中心-我的资料</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/form.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
@@ -20,7 +22,7 @@
 			<small class="content-subtitle">记得要完善自己的资料哦</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>个人中心
+				<i class="content-breadcrumb-icon  header-menu-icon-person"></i>个人中心
 				</span>>
 				<span class="content-breadcrumb-span">我的资料</span>
 			</div>
@@ -28,7 +30,7 @@
 
 		<form class="wrap wrap-myinfo" method="post" action="" enctype="multipart/form-data">
 			<h3 class="wrap-title">
-				<i class="wrap-title-icon"></i>PROFILE
+				<i class="wrap-title-icon header-menu-icon-option"></i>PROFILE
 			</h3>
 			<div class="wrap-myinfo-group">
 				<label class="wrap-myinfo-half" for="txtName">姓名：</label>

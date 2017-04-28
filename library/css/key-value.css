@@ -1,0 +1,19 @@
+.notice-title {
+    border-bottom: 1px dashed #dedad6;
+    padding: 10px 0 15px;
+    font-size: 21px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.notice-desc {
+    margin-top: 8px;
+    margin-bottom: 25px;
+    font-size: 12px;
+    text-align: center;
+    color: #999;
+}
+
+.notice-desc-info {
+    margin: 0 15px;
+}

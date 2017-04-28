@@ -27,7 +27,7 @@ input.frm-passwd-submit {
 }
 
 .frm-default-label {
-	margin-top: 30px;
+	margin-top: 12px;
 	margin-bottom: 10px;
 }
 
@@ -41,4 +41,217 @@ input.frm-passwd-submit {
     display: block;
     margin-top: 30px;
     margin-left: 270px;
+}
+
+/* admin-users.php 读者管理页面 */
+.wrap-users {
+	position: relative;
+	border-top-color: #EE82EE;
+}
+
+.wrap-search {
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	right: 25px;
+}
+
+input.wrap-search-text {
+	display: inline-block;
+}
+
+.wrap-add {
+	display: inline-block;
+    position: relative;
+    top: 12px;
+    right: 10px;
+	width: 32px;
+    height: 32px;
+    background-image: url(../imgs/add.gif);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+/* admin-users-edit.php 读者管理编辑页面 */
+.wrap-user-edit {
+	overflow: hidden;
+	width: 800px;
+}
+
+.wrap-left {
+	float: left;
+	position: relative;
+	width: 50%;
+}
+
+.wrap-new-label {
+	margin-bottom: 10px;
+}
+
+.wrap-new-text {
+	width: 80%;
+}
+
+.wrap-new-file {
+	display: inline-block;
+	width: 200px;
+}
+
+.wrap-new-file:focus {
+	border: 0;
+	box-shadow: none;
+	outline: 0;
+}
+
+.wrap-group {
+	margin-bottom: 25px;
+	font-size: 14px;
+	color: #555;
+}
+
+.wrap-new-image {
+	position: absolute;
+	top: 3px;
+	max-width: 100px;
+	max-height: 55px;
+}
+
+.wrap-group-btn {
+	margin-bottom: 0;
+	text-align: center;
+}
+
+.wrap-new-button {
+	margin: 20px 25px 0;
+}
+
+/* admin-intr.php 图书馆概述 */
+.wrap-intr-edit {
+	margin-top: 15px;
+}
+
+/* admin-news-edit.php 新闻编辑 */
+.wrap-news-edit {
+	width: 90%;
+}
+
+.wrap-news-edit-btn {
+	margin-left: 20px;
+}
+
+/* admin-download-edit.php 资源下载编辑页面 */
+.wrap-group-textarea {
+	width: 80%;
+	height:  60px;
+	resize: none;
+}
+
+/* admin-categroy.php 书籍类别页面 */
+.cate-group {
+	overflow: hidden;
+	padding: 20px 8px 8px;
+}
+
+.cate-item {
+	float: left;
+	position: relative;
+	margin-right: 25px;
+	margin-bottom: 35px;
+	padding: 10px 25px;
+	color: #333;
+	background-color: #f9f9f9;
+	box-shadow: 0 0 1px 2px rgba(0, 0, 0, .1);
+}
+
+.cate-item:hover .cate-item-dele,
+.cate-item:hover .cate-item-edit {
+	display: block;
+}
+
+.cate-item-edit {
+	display: none;
+	position: absolute;
+	right: -4px;
+	bottom: -4px;
+	border: 1px solid #ccc;
+	border-radius: 50%;
+	width: 14px;
+	height: 14px;
+	background-size: cover;
+	background-image: url("../imgs/icon-edit.png");
+}
+
+.cate-item-dele {
+	display: none;
+	position: absolute;
+	top: -4px;
+	right: -4px;
+	border-radius: 50%;
+	width: 16px;
+	height: 16px;
+	text-align: center;
+	line-height: 12px;
+	font-size: 30px;
+	color: #fff;
+	background-color: #00c0ef;
+}
+
+.cate-edit-title {
+	margin-top: 30px;
+	font-size: 18px;
+	font-weight: 400;
+	color: #333;
+}
+
+.cate-edit {
+	overflow: hidden;
+	margin-top: 6px;
+	border-top: 1px solid #f1f1f1;
+	padding: 20px;
+	height: 34px;
+	line-height: 34px;
+}
+
+.cate-edit input,
+.cate-edit label {
+	float: left;
+}
+
+.cate-edit input[type="text"] {
+	width: 200px;
+}
+
+.cate-edit input[type="submit"] {
+	margin-left: 30px;
+}
+
+.cate-edit-title-a {
+	float: right;
+	margin-right: 200px;
+	font-size: 13px;
+	color: #666;
+	text-decoration: underline;
+}
+
+/* admin-book-edit.php 书籍编辑页面 */
+.wrap-new-area {
+	height: 110px;
+}
+
+.wrap-new-select {
+	width: 87%;
+}
+
+.book-edit-wrap input {
+	margin: 30px 40px 0;
+}
+
+.wrap-add-each {
+	position: absolute;
+	right: 30px;
+}
+
+/* admin-eachbooks-edit.php */
+.wrap-each-select {
+	width: 83%;
 }

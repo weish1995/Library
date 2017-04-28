@@ -1,6 +1,6 @@
 <!-- 顶部导航层 -->
 <div class="header-top">
-	<a class="header-top-logo" href="student-index.php">Library</a>
+	<a class="header-top-logo" href="../index.php">Library</a>
 	<a class="logout" href="javascript:void(0)">退出</a>
 </div>
 <?php 
@@ -30,32 +30,32 @@
 		<ul class="header-menu">
 			<li class="header-menu-cate">
 				<a href="javascript:void(0);">
-					<i class="header-menu-icon"></i>
+					<i class="header-menu-icon header-menu-icon-person"></i>
 					<span>个人中心</span>
 					<i class="header-menu-toggle">></i>
 				</a>
 				<ul>
 					<li>
 						<a href="student-index.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-home"></i>
 							<span>我的首页</span>
 						</a>
 					</li>
 					<li>
 						<a href="student-myinfo.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-option"></i>
 							<span>我的资料</span>
 						</a>
 					</li>
 					<li>
 						<a href="student-passwd.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-lock"></i>
 							<span>修改密码</span>
 						</a>
 					</li>
 					<li>
 						<a href="student-loginfo.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-text"></i>
 							<span>登录日志</span>
 						</a>
 					</li>
@@ -63,38 +63,38 @@
 			</li>
 			<li class="header-menu-cate">
 				<a href="javascript:void(0);">
-					<i class="header-menu-icon"></i>
+					<i class="header-menu-icon header-menu-icon-circle"></i>
 					<span>借阅信息</span>
 					<i class="header-menu-toggle">></i>
 				</a>
 				<ul>
 					<li>
 						<a href="student-current.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-current"></i>
 							<span>当前借阅</span>
 						</a>
 					</li>
 					<li>
 						<a href="student-history.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-history"></i>
 							<span>历史借阅</span>
 						</a>
 					</li>
 					<li>
 						<a href="student-order.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-order"></i>
 							<span>预约记录</span>
 						</a>
 					</li>
 					<li>
 						<a href="student-overdue.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-overdue"></i>
 							<span>超期信息</span>
 						</a>
 					</li>
 					<li>
 						<a href="student-arrearage.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-money"></i>
 							<span>欠款记录</span>
 						</a>
 					</li>
@@ -102,20 +102,20 @@
 			</li>
 			<li class="header-menu-cate">
 				<a href="javascript:void(0);">
-					<i class="header-menu-icon"></i>
+					<i class="header-menu-icon header-menu-icon-comm"></i>
 					<span>图书推荐</span>
 					<i class="header-menu-toggle">></i>
 				</a>
 				<ul>
 					<li>
 						<a href="student-recomment.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-mycomm"></i>
 							<span>我的推荐</span>
 						</a>
 					</li>
 					<li>
 						<a href="student-recomall.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-allcomm"></i>
 							<span>电子订单推荐</span>
 						</a>
 					</li>

@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>个人中心-我的首页</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/form.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-index.css">
 </head>
 <body>
@@ -14,7 +16,7 @@
 			<h3 class="content-title">我的首页</h3>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>个人中心
+				<i class="content-breadcrumb-icon header-menu-icon-person"></i>个人中心
 				</span>>
 				<span class="content-breadcrumb-span">我的首页</span>
 			</div>

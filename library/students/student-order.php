@@ -2,22 +2,31 @@
 <html>
 <head>
 	<title>借阅信息-预约记录</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/form.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
 	<?php 
-		// error_reporting(0); // 不显示警告
+		error_reporting(0); // 不显示警告
 		include 'student-master.php';
 
 		// 取消预约操作
 		if (isset($_GET['orderId']) && $_GET['orderId'] >= 1) {
 
 			// 获取预约的类型，防止sql注入
-			$type = $db->getData('select orderType from orders where orderId = '.$_GET['orderId'])[0][0];
+			$type = $db->getSingleData('select orderType from orders where orderId = '.$_GET['orderId']);
 
-			if ($type == '待生效' || $type == '生效中') {
+			if ($type == '生效中') {
 				if ($db->singleOp('update orders set orderType = "已取消" where orderId ='.$_GET['orderId'])) {
+					// 取消预约之后 将书籍状态改为 在馆
+					// 获取到操作书籍的索书号
+					$eachId = $db->getSingleData('select eachId from orders where orderId = '.$_GET['orderId']);
+
+					$sqlStatus = 'update eachbooks set status = "在馆" where eachId = "'.$eachId.'"';
+					$db->singleOp($sqlStatus);
+
 					echo '<script>alert("取消预约成功");</script>';
 				} else {
 					echo '<script>alert("取消预约失败");</script>';
@@ -26,7 +35,7 @@
 		}
 
 		// 获取当前学生的所有登录日志的总次数--用于分页
-		$counts = $db->getNum('select * from orders join books on books.bookId = orders.bookId where orders.studentsId = "'.$_SESSION['user'].'"');
+		$counts = $db->getNum('select * from orders where orders.studentsId = "'.$_SESSION['user'].'"');
 		$onePage = 16 > $counts ? $counts : 16; // 一页显示16条记录
 		$allPages = $onePage == 0 ? 1 : ceil($counts / $onePage); // 总页数
 
@@ -38,7 +47,7 @@
 		}
 
 		// 获取当前学生指定长度的登录日志信息sql
-		$logSql = 'select * from orders join books on books.bookId = orders.bookId where orders.studentsId = "'.$_SESSION['user'].'"';
+		$logSql = 'select * from orders join eachbooks on eachbooks.eachId = orders.eachId join books on books.booksId = eachbooks.booksId where orders.studentsId = "'.$_SESSION['user'].'"';
 
 		$sortStr = ''; // 存储url上的sort和sortType链接
 
@@ -70,7 +79,7 @@
 			<small class="content-subtitle">没有库存的书籍预约记录</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>借阅信息
+				<i class="content-breadcrumb-icon header-menu-icon-circle"></i>借阅信息
 				</span>>
 				<span class="content-breadcrumb-span">预约记录</span>
 			</div>
@@ -78,15 +87,26 @@
 
 		<div class="wrap wrap-order">
 			<h3 class="wrap-title">
-				<i class="wrap-title-icon"></i>ORDER
+				<i class="wrap-title-icon header-menu-icon-order"></i>ORDER
 			</h3>
 
 			<div class="mytable">
 				<div class="mytable-th">
-					<div class="mytable-th-td mytable-th-td-small" alt="orderType">状态</div>
-					<div class="mytable-th-td mytable-th-td-large" alt="bookName">书籍名</div>
-					<div class="mytable-th-td" alt="orderDate">预约时间</div>
-					<div class="mytable-th-td mytable-th-td-small">操作</div>
+					<div class="mytable-th-td mytable-th-td-small" alt="orderType">
+						状态<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td mytable-th-td-large" alt="eachbooks.eachId">
+						索书号<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td mytable-th-td-large" alt="bookName">
+						书籍名<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="orderDate">
+						预约时间<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td mytable-th-td-small">
+						操作
+					</div>
 				</div>
 				<?php 
 					for ($i = 0; $i < count($infos); $i++) {
@@ -95,9 +115,6 @@
 					<div class="mytable-tr-td mytable-th-td-small">
 						<?php
 							// 判断借书记录的当前状态
-							if ($infos[$i]['orderType'] == '待生效') {
-								echo '<i class="book-state book-state-yellow">待生效</i>';
-							}
 							if ($infos[$i]['orderType'] == '生效中') {
 								echo '<i class="book-state book-state-green">生效中</i>';
 							}
@@ -112,6 +129,7 @@
 							}
 						?>
 					</div>
+					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['eachId'];?></div>
 					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['bookName'];?></div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['orderDate'];?></div>
 					<div class="mytable-tr-td mytable-th-td-small">

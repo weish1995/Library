@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>个人中心-修改密码</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/form.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
@@ -17,7 +19,7 @@
 			<small class="content-subtitle">经常更换密码更安全哟</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>个人中心
+				<i class="content-breadcrumb-icon header-menu-icon-person"></i>个人中心
 				</span>>
 				<span class="content-breadcrumb-span">修改密码</span>
 			</div>
@@ -25,7 +27,7 @@
 
 		<form class="frm-passwd wrap" action="" method="post">
 			<h3 class="frm-passwd-title wrap-title">
-				<i class="frm-passwd-title-icon wrap-title-icon"></i>PASSWORD
+				<i class="frm-passwd-title-icon wrap-title-icon header-menu-icon-lock"></i>PASSWORD
 			</h3>
 			<input class="frm-passwd-input" type="password" name="txtOldPwd" placeholder="请输入旧密码" required>
 			<input class="frm-passwd-input frm-passwd-newpwd" type="password" name="txtNewPwd" placeholder="请输入密码，6-16位" required pattern="\w{6,16}">

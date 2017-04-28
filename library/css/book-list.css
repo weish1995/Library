@@ -1,0 +1,235 @@
+body {
+    background-color: #fafafa;
+}
+
+.search {
+    height: 125px;
+    text-align: center;
+    background-color: #e1e1e1;
+    background-image: url("../imgs/item-search.jpg");
+}
+
+.search-wrap {
+    display: inline-block;
+    overflow: hidden;
+    margin: 40px 0 10px;
+    line-height: 48px;
+    clear: both;
+}
+
+.search-select {
+    float: left;
+    border: 0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 14px 12px 16px;
+    width: auto;
+    height: auto;
+    font-size: 14px;
+    outline: 0;
+    color: #333;
+    cursor: pointer;
+}
+
+input.search-input {
+    float: left;
+    margin-left: 10px;
+    border: none;
+    -webkit-border-radius: 5px 0 0 5px;
+    -moz-border-radius: 5px 0 0 5px;
+    border-radius: 5px 0 0 5px;
+    padding: 15px 20px;
+    width: 500px;
+    height: 18px;
+    font-family: tahoma,"Microsoft YaHei", Simsun, "Arial Unicode MS",Mingliu,Arial,Helvetica;
+    font-size: 14px;
+    line-height: 18px;
+    background-color: #fff;
+}
+
+.search-button {
+    float: left;
+    margin: 0;
+    border: none;
+    -webkit-border-radius: 0 5px 5px 0;
+    -moz-border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
+    padding: 0 40px 0 60px;
+    height: 48px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 48px;
+    color: #fff;
+    background: #5a7aea url(../imgs/ico.png) no-repeat 35px -84px;
+    cursor: pointer;
+}
+
+input.search-input:focus,
+.search-button:focus {
+    border: 0;
+    outline: none;
+}
+
+.main {
+    padding-top: 0;
+}
+
+.result {
+    display: inline-block;
+    float: right;
+    font-size: 12px;
+    text-align: right;
+    line-height: 40px;
+    letter-spacing: 2px;
+}
+
+.result-number {
+    display: inline-block;
+    margin: 2px;
+    letter-spacing: 0;
+}
+
+.left {
+    float: left;
+    width: 250px;
+}
+
+.main-title {
+    height: 40px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 40px;
+}
+
+.main-title span {
+    font-size: 14px;
+}
+
+.main-title-icon {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+}
+
+.main-title-icon-total {
+    background-image: url("../imgs/icon-total.png");
+    margin-right: 2px;
+}
+
+.main-title-icon-search {
+    background-image: url("../imgs/icon-search.png");
+}
+
+.screen-item {
+    margin-bottom: 10px;
+    border: 1px solid #d5e2e3;
+    background-color: #fff;
+}
+
+.screen-item-title {
+    border-bottom: 1px solid #dde6e7;
+    padding-left: 10px;
+    height: 40px;
+    font-family: Microsoft YaHei;
+    font-size: 16px;
+    font-weight: lighter;
+    line-height: 40px;
+    color: #303d3f;
+}
+
+.screen-item-list {
+    margin-bottom: 2px;
+    padding: 1px 15px;
+    font-size: 12px;
+    text-align: right;
+    line-height: 21px;
+    color: #000;
+}
+
+.screen-item-list:hover {
+    background-color: #f5f9f9;
+}
+
+.screen-item-list-src {
+    float: left;
+}
+
+.screen-item-list-src:hover {
+    text-decoration: underline;
+}
+
+.right {
+    float: right;
+    width: 900px;
+}
+
+.list-item {
+    position: relative;
+    margin-bottom: 15px;
+    border: 1px solid #d5e2e3;
+    padding: 15px 0 0 140px;
+    width: 900px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.list-item-title-name {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+    color: #004FA1;
+    border-bottom: 1px dotted #777;
+}
+
+.list-item-title-name:hover {
+    opacity: .8;
+}
+
+.list-item-image-wrap {
+    position: absolute;
+    top: 15px;
+    left: 25px;
+}
+
+.list-item-image {
+    border: 1px solid #ccc;
+    width: 90px;
+    height: 120px;
+    box-shadow: 2px 1px 0 rgba(0,0,0,0.3);
+}
+
+.list-item-info {
+    padding: 2px 0;
+    min-height: 23px;
+    font-size: 12px;
+    line-height: 19px;
+    color: #333;
+}
+
+.list-item-info-span {
+    color: #999;
+}
+
+.list-item-borrow {
+    border: solid #c5d0dc;
+    border-width: 1px 0 0 1px;
+    height: 32px;
+    font-size: 12px;
+    line-height: 32px;
+    padding-left: 10px;
+    background-color: #f9f9f9;
+}
+
+/* 将搜索相关标红 */
+.main i {
+    font-style: normal;
+    color: #f00;
+}
+
+.pages-list {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

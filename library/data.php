@@ -42,7 +42,7 @@
 		* @func
 		* @desc 单条搜索数据操作
 		* @param {string} $sql - sql语句
-		* return {array} resl 二维数组
+		* return {array} resl - 二维数组
 		*/
 		function getData($sql) {
 			$this->open();
@@ -58,10 +58,20 @@
 		}
 
 		/**
+		* @func getSingleData
+		* @desc 单字段 单条搜索数据
+		* @param {string} $sql - sql语句
+		* return {string} resl - 字符串
+		*/
+		function getSingleData($sql) {
+			return $this->getData($sql)[0][0];
+		}
+
+		/**
 		* @func
 		* @desc 获取指定查询sql的返回值数量
-		* @param {string} $sql sql语句
-		* return {number} $num 数量
+		* @param {string} $sql - sql语句
+		* return {number} $num - 数量
 		*/
 		function getNum($sql) {
 			$this->open();
@@ -76,7 +86,7 @@
 		* @func
 		* @desc 验证是否存在数据
 		* @param {string} $sql - sql语句
-		* return {bool} true 存在  false 不存在
+		* return {bool} true - 存在 - false 不存在
 		*/
 		function dataSet($sql) {
 			$this->open();

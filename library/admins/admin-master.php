@@ -1,6 +1,6 @@
 <!-- 顶部导航层 -->
 <div class="header-top">
-	<a class="header-top-logo" href="Index.php">Library</a>
+	<a class="header-top-logo" href="../index.php">Library</a>
 	<a class="logout" href="javascript:void(0)">退出</a>
 </div>
 <?php 
@@ -30,26 +30,26 @@
 		<ul class="header-menu">
 			<li class="header-menu-cate">
 				<a href="javascript:void(0);">
-					<i class="header-menu-icon"></i>
+					<i class="header-menu-icon header-menu-icon-option"></i>
 					<span>系统配置</span>
 					<i class="header-menu-toggle">></i>
 				</a>
 				<ul>
 					<li>
 						<a href="admin-index.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-home"></i>
 							<span>我的首页</span>
 						</a>
 					</li>
 					<li>
 						<a href="admin-passwd.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-lock"></i>
 							<span>修改密码</span>
 						</a>
 					</li>
 					<li>
 						<a href="admin-default.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-set"></i>
 							<span>初始值设置</span>
 						</a>
 					</li>
@@ -57,15 +57,54 @@
 			</li>
 			<li class="header-menu-cate">
 				<a href="javascript:void(0);">
-					<i class="header-menu-icon"></i>
-					<span>人员管理</span>
+					<i class="header-menu-icon header-menu-icon-people"></i>
+					<span>人员书籍</span>
 					<i class="header-menu-toggle">></i>
 				</a>
 				<ul>
 					<li>
 						<a href="admin-user.php">
-							<i class="header-menu-icon"></i>
+							<i class="header-menu-icon header-menu-icon-person"></i>
 							<span>读者管理</span>
+						</a>
+					</li>
+					<li>
+						<a href="admin-category.php">
+							<i class="header-menu-icon header-menu-icon-cate"></i>
+							<span>书籍类别</span>
+						</a>
+					</li>
+					<li>
+						<a href="admin-books.php">
+							<i class="header-menu-icon header-menu-icon-book"></i>
+							<span>图书管理</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="header-menu-cate">
+				<a href="javascript:void(0);">
+					<i class="header-menu-icon header-menu-icon-link"></i>
+					<span>资源信息</span>
+					<i class="header-menu-toggle">></i>
+				</a>
+				<ul>
+					<li>
+						<a href="admin-intr.php">
+							<i class="header-menu-icon header-menu-icon-desc"></i>
+							<span>图书馆概述</span>
+						</a>
+					</li>
+					<li>
+						<a href="admin-news.php">
+							<i class="header-menu-icon header-menu-icon-email"></i>
+							<span>新闻通知</span>
+						</a>
+					</li>
+					<li>
+						<a href="admin-download.php">
+							<i class="header-menu-icon header-menu-icon-download"></i>
+							<span>资源下载</span>
 						</a>
 					</li>
 				</ul>

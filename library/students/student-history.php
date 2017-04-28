@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>借阅信息-历史借阅</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/form.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
@@ -23,8 +25,9 @@
 		}
 
 		// 获取当前历史借阅信息
-		$logSql = 'select * from records join books on records.bookId = books.bookId join floors on floors.floorId = books.floorId '
-					.'join campus on campus.campusId = floors.campusId where records.endDate is not null and studentId = "'.$_SESSION['user'].'"';
+		$logSql = 'select * from records join eachbooks on records.eachId = eachbooks.eachId '
+					.' join books on books.booksId = eachbooks.booksId '
+					.'where records.endDate is not null and studentId = "'.$_SESSION['user'].'"';
 
 		$sortStr = ''; // 存储url上的sort和sortType链接
 
@@ -46,7 +49,7 @@
 		// 分页限制
 		$logSql .= ' limit '.($page - 1) * $onePage.', '.$onePage;
 
-		$infos = $db->getData($logSql); // 存储登录日志信息
+		$infos = $db->getData($logSql); // 存储信息
 	?>
 
 	<div class="content">
@@ -56,7 +59,7 @@
 			<small class="content-subtitle">借阅并已归还的书籍借阅记录</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>借阅信息
+				<i class="content-breadcrumb-icon header-menu-icon-circle"></i>借阅信息
 				</span>>
 				<span class="content-breadcrumb-span">历史借阅</span>
 			</div>
@@ -64,30 +67,33 @@
 
 		<div class="wrap wrap-history">
 			<h3 class="wrap-title">
-				<i class="wrap-title-icon"></i>HISTORY
+				<i class="wrap-title-icon header-menu-icon-history"></i>HISTORY
 			</h3>
 
 			<div class="mytable">
 				<div class="mytable-th">
-					<div class="mytable-th-td mytable-th-td-large" alt="bookName">书籍名</div>
-					<div class="mytable-th-td mytable-th-td-large" alt="campusName">馆藏地</div>
-					<div class="mytable-th-td" alt="renew">续借次数</div>
-					<div class="mytable-th-td" alt="startDate">借阅日期</div>
-					<div class="mytable-th-td" alt="endDate">归还日期</div>
+					<div class="mytable-th-td mytable-th-td-large" alt="eachbooks.eachId">
+						索书号<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td mytable-th-td-large" alt="bookName">
+						书籍名<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="renew">
+						续借次数<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="startDate">
+						借阅日期<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="endDate">
+						归还日期<i class="mytable-th-td-icon"></i>
+					</div>
 				</div>
 				<?php 
 					for ($i = 0; $i < count($infos); $i++) {
 				?>
 				<div class="mytable-tr">
+					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['eachId'];?></div>
 					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['bookName'];?></div>
-					<div class="mytable-tr-td mytable-th-td-large">
-						<?php
-							// 获取当前馆藏地
-							$sqlCampus = 'select campusName from campus join floors on campus.campusId = floors.campusId join books on floors.floorId = books.floorId where bookId = "'.$infos[$i]['bookId'].'"';
-
-							echo $db->getData($sqlCampus)[0][0];
-						?>
-					</div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['renew'];?></div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['startDate'];?></div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['endDate'];?></div>

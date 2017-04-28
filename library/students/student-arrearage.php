@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>借阅信息-欠款记录</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/form.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
@@ -11,11 +13,11 @@
 		include 'student-master.php';
 
 		// 获取当前登陆学生的欠费总数和缴费总数
-		$oweDetail = $db->getData('select sum(repay) from owe join records on records.recordId = owe.recordId where records.studentId = "'.$_SESSION['user'].'"')[0][0];
+		$oweDetail = $db->getSingleData('select sum(repay) from owe join records on records.recordId = owe.recordId where records.studentId = "'.$_SESSION['user'].'"');
 
-		$money = $db->getData('select money from students where studentId = "'.$_SESSION['user'].'"')[0][0];
+		$money = $db->getSingleData('select money from students where studentId = "'.$_SESSION['user'].'"');
 
-		// 获取当前学生的所有登录日志的总次数--用于分页
+		// 获取当前学生的所有欠款记录的总数--用于分页
 		$counts = $db->getNum('select * from owe join records on records.recordId = owe.recordId where records.studentId = "'.$_SESSION['user'].'"');
 		$onePage = 16 > $counts ? $counts : 16; // 一页显示16条记录
 		$allPages = $onePage == 0 ? 1 : ceil($counts / $onePage); // 总页数
@@ -27,8 +29,11 @@
 			$page = 1; // 未传参则默认是首页
 		}
 
-		// 获取当前学生指定长度的登录日志信息sql
-		$logSql = 'select * from owe join records on records.recordId = owe.recordId join books on books.bookId = records.bookId where records.studentId = "'.$_SESSION['user'].'"';
+		// 获取当前学生指定长度的欠款记录sql
+		$logSql = 'select * from owe join records on records.recordId = owe.recordId'
+					.' join eachbooks on eachbooks.eachId = records.eachId'
+					.' join books on books.booksId = eachbooks.booksId'
+					.' where records.studentId = "'.$_SESSION['user'].'"';
 
 		$sortStr = ''; // 存储url上的sort和sortType链接
 
@@ -60,7 +65,7 @@
 			<small class="content-subtitle">所欠费用的详细信息</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>借阅信息
+				<i class="content-breadcrumb-icon header-menu-icon-circle"></i>借阅信息
 				</span>>
 				<span class="content-breadcrumb-span">欠款记录</span>
 			</div>
@@ -68,22 +73,38 @@
 
 		<div class="wrap wrap-arrearage">
 			<h3 class="wrap-title">
-				<i class="wrap-title-icon"></i>ARREARAGE
+				<i class="wrap-title-icon header-menu-icon-money"></i>ARREARAGE
 			</h3>
 
 			<div class="mytable">
 				<div class="mytable-th">
-					<div class="mytable-th-td mytable-th-td-large" alt="bookName">欠款书籍</div>
-					<div class="mytable-th-td" alt="oweDate">欠款时间</div>
-					<div class="mytable-th-td" alt="oweMoney">欠款金额</div>
-					<div class="mytable-th-td" alt="(oweMoney-repay)">减免金额</div>
-					<div class="mytable-th-td" alt="repay">应付金额</div>
-					<div class="mytable-th-td mytable-th-td-large" alt="season">欠款原因</div>
+					<div class="mytable-th-td mytable-th-td-large" alt="eachbooks.eachId">
+						索书号<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td mytable-th-td-large" alt="bookName">
+						欠款书籍名<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="oweDate">
+						欠款时间<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="oweMoney">
+						欠款金额<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="(oweMoney-repay)">
+						减免金额<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="repay">
+						应付金额<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td mytable-th-td-large" alt="season">
+						欠款原因<i class="mytable-th-td-icon"></i>
+					</div>
 				</div>
 				<?php 
 					for ($i = 0; $i < count($infos); $i++) {
 				?>
 				<div class="mytable-tr">
+					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['eachId'];?></div>
 					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['bookName'];?></div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['oweDate'];?></div>
 					<div class="mytable-tr-td">￥<?php echo number_format($infos[$i]['oweMoney'], 2);?></div> <!-- number_format 保留两位小数 -->

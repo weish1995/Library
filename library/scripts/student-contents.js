@@ -57,6 +57,11 @@ $('.mytable-th-td').on('click', function() {
 
 	// 将$paramObj对象转换为url 例如：$paramObj = ['page=1', 'sort=logDate', 'sortType=desc']
 	$urlAddr += '?page=' + $paramObj.page + '&sort=' + $paramObj.sort + '&sortType=' + $paramObj.sortType;
+
+	// 需要检索时
+	if ($paramObj.txtSearch) {
+		$urlAddr += '&txtSearch=' + $paramObj.txtSearch;
+	}
 	
 	top.location = $urlAddr;
 });
@@ -69,8 +74,9 @@ $('.current-table-renew').on('click', function(e) {
 	}
 });
 
-$('.current-table-return').on('click', function(e) {
-	if (!confirm('确认要还书吗?')) { // 弹出框点击的是“否”，则阻止链接跳转
+/* 删除询问 */
+$('.delete').on('click', function(e) {
+	if (!confirm('确认要删除吗?')) { // 弹出框点击的是“否”，则阻止链接跳转
 		e.preventDefault();
 	}
 });

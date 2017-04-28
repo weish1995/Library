@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>系统配置-我的首页</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/form.css">
 </head>
 <body>
 	<?php include 'admin-master.php'; ?>
@@ -13,7 +15,7 @@
 			<h3 class="content-title">我的首页</h3>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>系统配置
+				<i class="content-breadcrumb-icon header-menu-icon-option"></i>系统配置
 				</span>>
 				<span class="content-breadcrumb-span">我的首页</span>
 			</div>

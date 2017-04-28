@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>个人中心-登录日志</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/form.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
@@ -12,7 +14,7 @@
 
 		// 获取当前学生的所有登录日志的总次数--用于分页
 		$counts = $db->getNum('select * from loginfo where studentId = "'.$_SESSION['user'].'"');
-		$onePage = 3 > $counts ? $counts : 3; // 一页显示16条记录
+		$onePage = 16 > $counts ? $counts : 16; // 一页显示16条记录
 		$allPages = ceil($counts / $onePage); // 总页数
 
 		// 获取传入的参数page 当前页
@@ -55,7 +57,7 @@
 			<small class="content-subtitle">记录了您的每一次登录</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>个人中心
+				<i class="content-breadcrumb-icon header-menu-icon-person"></i>个人中心
 				</span>>
 				<span class="content-breadcrumb-span">登录日志</span>
 			</div>
@@ -63,14 +65,14 @@
 
 		<div class="wrap wrap-loginfo">
 			<h3 class="wrap-title">
-				<i class="wrap-title-icon"></i>LOGINFO
+				<i class="wrap-title-icon header-menu-icon-text"></i>LOGINFO
 			</h3>
 
 			<div class="mytable">
 				<div class="mytable-th">
-					<div class="mytable-th-td" alt="studentName">用户名</div>
-					<div class="mytable-th-td" alt="logDate">登录时间</div>
-					<div class="mytable-th-td" alt="logAddr">登录Ip地址</div>
+					<div class="mytable-th-td" alt="studentName">用户名<i class="mytable-th-td-icon"></i></div>
+					<div class="mytable-th-td" alt="logDate">登录时间<i class="mytable-th-td-icon"></i></div>
+					<div class="mytable-th-td" alt="logAddr">登录Ip地址<i class="mytable-th-td-icon"></i></div>
 				</div>
 				<?php 
 					for ($i = 0; $i < count($infos); $i++) {

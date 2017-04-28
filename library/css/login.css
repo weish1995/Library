@@ -1,5 +1,75 @@
+body {
+	font-family: 'Microsoft Yahei';
+	background-image: url("../imgs/login-bg.png");
+}
+
 .frm-login {
-	margin: 30px auto;
-	width: 200px;
+	margin: 60px auto;
+	border: 1px solid #c2d6d7;
+	border-radius: 5px;
+	width: 350px;
+	background-color: #fefefe;
+	box-shadow: 0 0 1px 1px rgba(0, 0, 0, .1);
+}
+
+.login-label {
+	margin-top: 30px;
+	margin-bottom: 10px;
+	margin-left: 30px;
+	font-size: 14px;
+	color: #333;
+}
+
+input.login-text {
+	margin-left: 30px;
+	padding: 7px 12px;
+	width: 290px;
+	box-sizing: border-box;
+}
+
+.login-btn-wrap {
+	margin-top: 30px;
+	border-top: 1px solid #dfe0e2;
+	padding-right: 15px;
+	height: 73px;
+	text-align: right;
+	line-height: 73px;
+	background-color: #f1f6f9;
+}
+
+input.login-btn {
+	border: 1px solid #97cceb;
+	border-radius: 13px;
+	padding: 0;
+	width: 75px;
+	height: 28px;
 	text-align: center;
+	line-height: 28px;
+	color: #fff;
+	background-color: #96d3ef;
+	box-sizing: content-box;
+}
+
+.login-radio-wrap {
+	display: flex;
+	margin-top: 30px;
+	padding: 0 30px;
+	align-items: center;
+}
+
+.login-radio {
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+}
+
+.login-radio:nth-of-type(2) {
+	margin-left: 35px;
+}
+
+.login-radio-label {
+	display: inline-block;
+	margin: 0;
+	font-size: 14px;
+	cursor: pointer;
 }

@@ -2,7 +2,9 @@
 <html>
 <head>
 	<title>图书推荐-添加推荐</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
+	<link rel="stylesheet" type="text/css" href="../css/form.css">
 	<link rel="stylesheet" type="text/css" href="../css/student-contents.css">
 </head>
 <body>
@@ -17,7 +19,7 @@
 			<small class="content-subtitle">向管理员推荐优秀的书籍吧</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
-				<i class="content-breadcrumb-icon"></i>推荐信息
+				<i class="content-breadcrumb-icon header-menu-icon-comm"></i>推荐信息
 				</span>>
 				<span class="content-breadcrumb-span">新建推荐</span>
 			</div>
@@ -25,7 +27,7 @@
 
 		<form class="wrap wrap-new-recom" method="post" action="">
 			<h3 class="wrap-title">
-				<i class="wrap-title-icon"></i>NEW RECOMMEND
+				<i class="wrap-title-icon header-menu-icon-add"></i>NEW RECOMMEND
 			</h3>
 			<div class="wrap-group">
 				<label class="wrap-new-label" for="txtName"><span class="require">*</span>书籍名：</label>

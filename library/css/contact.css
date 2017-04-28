@@ -1,0 +1,31 @@
+.map-container {
+    margin: 0 auto;
+    width: 1180px;
+    height: 450px;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .2);
+    -moz-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, .2);
+}
+
+.map-desc {
+    margin: 0 auto;
+    width: 1184px;
+    padding-left: 20px;
+    font-size: 14px;
+    font-style: normal;
+    color: #666;
+    background-color: #f6f6f6;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.map-desc-addr {
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+
+.map-desc-tele {
+    padding-top: 5px;
+    padding-bottom: 30px;
+}
