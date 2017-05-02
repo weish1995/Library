@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>人员书籍-读者管理</title>
+	<title>人员书籍-书籍推荐</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../css/master.css">
 	<link rel="stylesheet" type="text/css" href="../css/form.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin-contents.css">
 </head>
 <body>
-	<?php
-		error_reporting(0);
+	<?php 
 		include 'admin-master.php';
 
-		// 删除
-		if (isset($_GET['deleteId'])) {
-			if ($db->singleOp('delete from students where studentId = "'.$_GET['deleteId'].'"')) {
-				echo '<script>alert("删除成功!")</script>';
+		// 购买操作
+		if (isset($_GET['buyId'])) {
+			$buyId = $_GET['buyId'];
+
+			$sql = 'update recommends set recomType = "已购买" where recomId = '.$buyId;
+			if ($db->singleOp($sql)) {
+				echo '<script>alert("修改成功!")</script>';
 			} else {
-				echo '<script>alert("删除失败!")</script>';
+				echo '<script>alert("修改失败!")</script>';
 			}
 		}
-
-		// 从默认表里获取到超期每天的费用
-		$price = $db->getSingleData('select value_ from `default` where key_ = "超期单价"');
 
 		// 获取检索词  通过表单提交或url传递
 		if (isset($_POST['btnSearch']) || isset($_GET['txtSearch'])) {
 			$txtSearch = isset($_POST['txtSearch']) ? $_POST['txtSearch'] : $_GET['txtSearch'];
 
 			// 用于搜索时拼接到sql上的语句
-			$searchStr = ' where studentId like "%'.$txtSearch.'%" or studentName like "%'.$txtSearch.'%" ';
+			$searchStr = ' where studentName like "%'.$txtSearch.'%" or bookName like "%'.$txtSearch.'%" ';
 		} else {
 			$searchStr = ''; // 没有检索词则不需要更改sql
 		}
 
-		// 获取所有读者记录--用于分页
-		$counts = $db->getNum('select * from students'.$searchStr);
+		// 获取所有推荐信息记录--用于分页
+		$counts = $db->getNum('select * from recommends join students on students.studentId = recommends.studentId '.$searchStr);
 		$onePage = 10 > $counts ? $counts : 10; // 一页显示10条记录
 		$allPages = $onePage == 0 ? 1 : ceil($counts / $onePage); // 总页数
 
@@ -46,8 +45,8 @@
 			$page = 1; // 未传参则默认是首页
 		}
 
-		// 获取学生信息指定长度的登录日志信息sql
-		$logSql = 'select * from students'.$searchStr;
+		// 获取指定长度sql
+		$logSql = 'select * from recommends join students on students.studentId = recommends.studentId '.$searchStr;
 
 		$sortStr = ''; // 存储url上的sort和sortType链接 
 
@@ -80,24 +79,23 @@
 	<div class="content">
 		<!-- 正文内容头部 -->
 		<div class="content-header">
-			<h3 class="content-title">读者管理</h3>
-			<small class="content-subtitle">对读者的信息进行管理</small>
+			<h3 class="content-title">书籍推荐</h3>
+			<small class="content-subtitle">对读者推荐的信息进行管理</small>
 			<div class="content-breadcrumb">
 				<span class="content-breadcrumb-span">
 				<i class="content-breadcrumb-icon header-menu-icon-people"></i>人员书籍
 				</span>>
-				<span class="content-breadcrumb-span">读者管理</span>
+				<span class="content-breadcrumb-span">书籍推荐</span>
 			</div>
 		</div>
 
 		<div class="wrap wrap-users">
 			<h3 class="wrap-title">
-				<i class="wrap-title-icon header-menu-icon-allcomm"></i>USERS
+				<i class="wrap-title-icon header-menu-icon-comm"></i>RECOMMEND
 			</h3>
 
 			<form class="wrap-search" action="" method="get">
-				<a class="wrap-add" href="admin-user-edit.php"></a>
-				<input class="wrap-search-text" type="text" name="txtSearch" placeholder="Id/姓名 检索" value="<?php 
+				<input class="wrap-search-text" type="text" name="txtSearch" placeholder="姓名/书籍 检索" value="<?php 
 						if (isset($txtSearch)) {
 							echo $txtSearch;
 						}
@@ -107,23 +105,32 @@
 
 			<div class="mytable">
 				<div class="mytable-th">
-					<div class="mytable-th-td">
-						头像
-					</div>
-					<div class="mytable-th-td" alt="studentId">
-						读者号<i class="mytable-th-td-icon"></i>
+					<div class="mytable-th-td" alt="bookName">
+						推荐书籍<i class="mytable-th-td-icon"></i>
 					</div>
 					<div class="mytable-th-td" alt="studentName">
-						姓名<i class="mytable-th-td-icon"></i>
+						推荐人<i class="mytable-th-td-icon"></i>
 					</div>
-					<div class="mytable-th-td" alt="passwd">
-						密码<i class="mytable-th-td-icon"></i>
+					<div class="mytable-th-td" alt="author">
+						作者<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="press">
+						出版社<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="ibsn">
+						IBSN<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="agree">
+						推荐数<i class="mytable-th-td-icon"></i>
 					</div>
 					<div class="mytable-th-td">
-						欠款金额
+						推荐理由
 					</div>
-					<div class="mytable-th-td" alt="money">
-						缴费金额<i class="mytable-th-td-icon"></i>
+					<div class="mytable-th-td" alt="recomDate">
+						推荐日期<i class="mytable-th-td-icon"></i>
+					</div>
+					<div class="mytable-th-td" alt="recomType">
+						状态<i class="mytable-th-td-icon"></i>
 					</div>
 					<div class="mytable-th-td">
 						操作
@@ -133,34 +140,39 @@
 					for ($i = 0; $i < count($infos); $i++) {
 				?>
 				<div class="mytable-tr">
-					<div class="mytable-tr-td">
-						<img class="mytable-tr-td-img" src="../<?php echo $infos[$i]['photo'];?>">
-					</div>
-					<div class="mytable-tr-td">
-						<?php echo $infos[$i]['studentId'];?>
+					<div class="mytable-tr-td bookName">
+						<?php echo $infos[$i]['bookName'];?>
 					</div>
 					<div class="mytable-tr-td">
 						<?php echo $infos[$i]['studentName'];?>
 					</div>
 					<div class="mytable-tr-td">
-						<?php echo $infos[$i]['passwd'];?>
+						<?php echo $infos[$i]['author'];?>
+					</div>
+					<div class="mytable-tr-td">
+						<?php echo $infos[$i]['press'];?>
+					</div>
+					<div class="mytable-tr-td">
+						<?php echo $infos[$i]['ibsn'];?>
+					</div>
+					<div class="mytable-tr-td">
+						<?php echo $infos[$i]['agree'];?>
+					</div>
+					<div class="mytable-tr-td" alt="<?php echo $infos[$i]['reason'];?>">
+						<a class="click-detail" href="javascript:void(0)">点击查看</a>
+					</div>
+					<div class="mytable-tr-td">
+						<?php echo $infos[$i]['recomDate'];?>
+					</div>
+					<div class="mytable-tr-td">
+						<?php echo $infos[$i]['recomType'];?>
 					</div>
 					<div class="mytable-tr-td">
 						<?php
-							// 获取超期天数总数
-							$sqlDiff= 'select sum(timestampdiff(DAY, destine, endDate)) from records where studentId = "'.$infos[$i]['studentId'].'" and endDate > destine';
-
-							$diff = floatval($db->getSingleData($sqlDiff)); // 获取并转换为浮点数
-
-							echo number_format($diff * $price, 2);
+							if ($infos[$i]['recomType'] == '未购买') {
+								echo '<a class="buy" href="admin-comm.php?buyId='.$infos[$i]['recomId'].'">购买</a>';
+							}
 						?>
-					</div>
-					<div class="mytable-tr-td">
-						<?php echo number_format($infos[$i]['money'], 2);;?>
-					</div>
-					<div class="mytable-tr-td">
-						<a class="delete" href="admin-user.php?deleteId=<?php echo $infos[$i]['studentId'];?>">删除</a>
-						<a href="admin-user-edit.php?studentId=<?php echo $infos[$i]['studentId'];?>">编辑(缴费)</a>
 					</div>
 				</div>
 				<?php
@@ -176,16 +188,16 @@
 						echo '<a class="tobutton pages-op disabled" href="javascript:void(0)">首页</a>'
 							.'<a class="tobutton pages-op disabled" href="javascript:void(0)">上一页</a>';
 					} else {
-						echo '<a class="tobutton pages-op" href="admin-user.php?page=1'.$sortStr.'">首页</a>'
-							.'<a class="tobutton pages-op" href="admin-user.php?page='.($page-1).$sortStr.'">上一页</a>';
+						echo '<a class="tobutton pages-op" href="admin-comm.php?page=1'.$sortStr.'">首页</a>'
+							.'<a class="tobutton pages-op" href="admin-comm.php?page='.($page-1).$sortStr.'">上一页</a>';
 					}
 
 					if ($page == $allPages) {
 						echo '<a class="tobutton pages-op disabled" href="javascript:void(0)">下一页</a>'
 							.'<a class="tobutton pages-op disabled" href="javascript:void(0)">尾页</a>';
 					} else {
-						echo '<a class="tobutton pages-op" href="admin-user.php?page='.($page+1).$sortStr.'">下一页</a>'
-							.'<a class="tobutton pages-op" href="admin-user.php?page='.$allPages.$sortStr.'">尾页</a>';
+						echo '<a class="tobutton pages-op" href="admin-comm.php?page='.($page+1).$sortStr.'">下一页</a>'
+							.'<a class="tobutton pages-op" href="admin-comm.php?page='.$allPages.$sortStr.'">尾页</a>';
 					}
 				?>
 			</div>

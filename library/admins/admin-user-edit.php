@@ -19,10 +19,17 @@
 		$email = '';
 		$qq = '';
 		$addr = '';
+		$money = ''; // 剩余欠费
 
 		// id存在则是修改 不存在则是添加
 		if (isset($_GET['studentId'])) {
 			$studentInfo = $db->getData('select * from students where studentId = "'.$_GET['studentId'].'"')[0];
+
+			// 从默认表里获取到超期每天的费用
+			$price = $db->getSingleData('select value_ from `default` where key_ = "超期单价"');
+
+			// 获取超期天数总数
+			$sqlDiff= 'select sum(timestampdiff(DAY, destine, endDate)) from records where studentId = "'.$_GET['studentId'].'" and endDate > destine';
 
 			$studentId = $_GET['studentId'];
 			$name = $studentInfo['studentName'];
@@ -32,6 +39,7 @@
 			$qq = $studentInfo['qq'];
 			$addr = $studentInfo['address'];
 			$photo = $studentInfo['photo'];
+			$money = $price * $db->getSingleData($sqlDiff) - $studentInfo['money']; // 计算剩余欠费
 		}
 	?>
 
@@ -55,7 +63,7 @@
 			<div class="wrap-left">
 				<div class="wrap-group">
 					<label class="wrap-new-label" for="txtId"><span class="require">*</span>读者Id：</label>
-					<input class="wrap-new-text" name="txtId" id="txtId" value="<?php echo $studentId;?>" type="text" required placeholder="读者Id" <?php if ($studentId != '') echo 'disabled=""';?>>
+					<input class="wrap-new-text <?php if ($studentId != '') echo 'disabled';?>" name="txtId" id="txtId" value="<?php echo $studentId;?>" type="text" required placeholder="读者Id" <?php if ($studentId != '') echo 'disabled=""';?>>
 				</div>
 				<div class="wrap-group">
 					<label class="wrap-new-label" for="txtName"><span class="require">*</span>姓名：</label>
@@ -68,6 +76,12 @@
 				<div class="wrap-group">
 					<label class="wrap-new-label" for="txtQq">qq：</label>
 					<input class="wrap-new-text" type="text" name="txtQq" id="txtQq" value="<?php echo $qq;?>" placeholder="请输入QQ：">
+				</div>
+				<div class="wrap-group">
+					<label class="wrap-new-label" for="txtOwe">剩余欠费：</label>
+					<input class="wrap-new-text disabled" type="text" name="txtOwe" id="txtOwe" value="￥<?php 
+						echo number_format($money*1, 2);
+					?>" disabled max="1">
 				</div>
 			</div>
 			<div class="wrap-left">
@@ -87,6 +101,10 @@
 				<div class="wrap-group">
 					<label class="wrap-new-label" for="txtAddr">地址：</label>
 					<input class="wrap-new-text" type="text" name="txtAddr" id="txtAddr" value="<?php echo $addr;?>" placeholder="请输入地址：">
+				</div>
+				<div class="wrap-group">
+					<label class="wrap-new-label" for="txtMoney">缴费：</label>
+					<input class="wrap-new-text <?php if (!$studentId) echo 'disabled';?>" type="text" name="txtMoney" id="txtMoney" pattern="^\d*.\d{2}$" <?php if (!$studentId) echo 'disabled';?> placeholder="请输入缴纳金额：格式（xxx.xx）" value="0.00">
 				</div>
 			</div>
 			<div class="wrap-group wrap-group-btn">
@@ -115,7 +133,7 @@
 
 		if ($studentId != '') {
 			// 修改资料的sql语句
-			$sqlinfo = 'update students set studentName = "'.$_POST['txtName'].'", photo = "'.$imgName.'", passwd = "'.$_POST['txtPasswd'].'", email="'.$_POST['txtEmail'].'", address = "'.$_POST['txtAddr'].'", qq = "'.$_POST['txtQq'].'", tel = "'.$_POST['txtTele'].'" where studentId = "'.$studentId.'"';
+			$sqlinfo = 'update students set studentName = "'.$_POST['txtName'].'", photo = "'.$imgName.'", passwd = "'.$_POST['txtPasswd'].'", email="'.$_POST['txtEmail'].'", address = "'.$_POST['txtAddr'].'", qq = "'.$_POST['txtQq'].'", tel = "'.$_POST['txtTele'].'", money = '.$_POST['txtMoney'].' + money where studentId = "'.$studentId.'"';
 		} else {
 			// 检测用户id是否存在  若存在则不执行下面的操作
 			if ($db->dataSet('select * from students where studentId = "'.$_POST['txtId'].'"')) {

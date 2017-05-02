@@ -35,7 +35,7 @@
 		}
 
 		// 获取当前学生的所有登录日志的总次数--用于分页
-		$counts = $db->getNum('select * from orders where orders.studentsId = "'.$_SESSION['user'].'"');
+		$counts = $db->getNum('select * from orders where orders.studentId = "'.$_SESSION['user'].'"');
 		$onePage = 16 > $counts ? $counts : 16; // 一页显示16条记录
 		$allPages = $onePage == 0 ? 1 : ceil($counts / $onePage); // 总页数
 
@@ -47,7 +47,7 @@
 		}
 
 		// 获取当前学生指定长度的登录日志信息sql
-		$logSql = 'select * from orders join eachbooks on eachbooks.eachId = orders.eachId join books on books.booksId = eachbooks.booksId where orders.studentsId = "'.$_SESSION['user'].'"';
+		$logSql = 'select * from orders join eachbooks on eachbooks.eachId = orders.eachId join books on books.booksId = eachbooks.booksId where orders.studentId = "'.$_SESSION['user'].'"';
 
 		$sortStr = ''; // 存储url上的sort和sortType链接
 

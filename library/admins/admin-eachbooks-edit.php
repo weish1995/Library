@@ -45,7 +45,7 @@
 				$sqlinfo = "update eachbooks set floor = ".$_POST['selFloor'].", shelfNo = ".$_POST['selShelf'].", addr = '".$_POST['txtAddr']."' where eachId = '".$eachId."' and booksId = '".$_GET['booksId']."'";
 			} else {
 				// 添加书籍的sql语句
-				$eachId = $_GET['booksId'].substr(time(), 5, sizeof(time()) - 5); // booksId+时戳后四位 生成id
+				$eachId =time(); // 时戳 生成id
 				$sqlinfo = 'insert into eachbooks (eachId, booksId, floor, shelfNo, addr, status) values ("'.$eachId.'", "'.$_GET['booksId'].'", "'.$_POST['selFloor'].'", "'.$_POST['selShelf'].'", "'.$_POST['txtAddr'].'", "在馆")';
 			}
 

@@ -24,43 +24,10 @@
 			}
 		}
 
-		// 获取所有读者记录--用于分页
+		// 获取当前书籍的所有详细书籍记录--用于分页
 		$sql = 'select * from eachbooks join books on books.booksId = eachbooks.booksId where eachbooks.booksId = "'.$_GET['booksId'].'"';
-		$counts = $db->getNum($sql);
-		$onePage = 10 > $counts ? $counts : 10; // 一页显示10条记录
-		$allPages = $onePage == 0 ? 1 : ceil($counts / $onePage); // 总页数
 
-		// 获取传入的参数page 当前页
-		if (isset($_GET['page']) && $_GET['page'] >= 1) {
-			$page = $_GET['page'] > $allPages ? $allPages : $_GET['page']; // 传入参数大于总页数，默认显示最后一页
-		} else {
-			$page = 1; // 未传参则默认是首页
-		}
-
-		// 获取学生信息指定长度的登录日志信息sql
-		$logSql = $sql;
-
-		$sortStr = ''; // 存储url上的sort和sortType链接 
-
-		// 排序以及排序方式
-		if (isset($_GET['sort'])) {
-			$sort = $_GET['sort']; // 排序字段值
-			$sortStr .= '&sort='.$sort; // 排序字符串
-
-			if (isset($_GET['sortType'])) { // 排序方式  升序 或者 降序
-				$sortType = $_GET['sortType'];
-				$sortStr .= '&sortType='.$sortType;
-			} else {
-				$sortType = '';
-			}
-
-			$logSql .= ' order by '.$sort.' '.$sortType;
-		}
-
-		// 分页限制
-		$logSql .= ' limit '.($page - 1) * $onePage.', '.$onePage;
-
-		$infos = $db->getData($logSql); // 存储信息
+		$infos = $db->getData($sql); // 存储信息
 	?>
 
 	<div class="content">
@@ -132,7 +99,16 @@
 					<div class="mytable-tr-td mytable-th-td-large">
 						<a class="delete" href="admin-eachbooks.php?deleteId=<?php echo $infos[$i]['eachId'].'&booksId='.$_GET['booksId'];?>">删除</a>
 						<a href="admin-eachbooks-edit.php?eachId=<?php echo $infos[$i]['eachId'].'&booksId='.$_GET['booksId'];?>">编辑</a>
-						<a class="lend" href="admin-eachbooks.php?lendId=<?php echo $infos[$i]['eachId'].'&booksId='.$_GET['booksId'];?>">借出</a>
+						<a class="lend" href="admin-eachbooks-lend.php?eachId=<?php echo $infos[$i]['eachId']?>">
+							<?php
+								if ($infos[$i]['status'] == "在馆" || $infos[$i]['status'] == "预约中") {
+									echo '借书';
+								}
+								if ($infos[$i]['status'] == "已借出") {
+									echo '还书';
+								}
+							?>
+						</a>
 					</div>
 				</div>
 				<?php

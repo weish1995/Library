@@ -10,20 +10,19 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-04-28 17:17:27
+Date: 2017-05-02 15:47:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for admin
+-- Table structure for `admin`
 -- ----------------------------
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `adminId` varchar(100) NOT NULL,
   `adminName` varchar(100) DEFAULT NULL,
   `passwd` varchar(100) NOT NULL,
-  `adminType` varchar(100) NOT NULL,
   `memo` text,
   PRIMARY KEY (`adminId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -31,11 +30,11 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('weish', 'wsj', 'wwwwww', '超级管理员', null);
-INSERT INTO `admin` VALUES ('zz', 'sxh', 'zzzzzz', '超级管理员', null);
+INSERT INTO `admin` VALUES ('weish', 'wsj', 'wwwwww', null);
+INSERT INTO `admin` VALUES ('zz', 'sxh', 'zzzzzz', null);
 
 -- ----------------------------
--- Table structure for agrees
+-- Table structure for `agrees`
 -- ----------------------------
 DROP TABLE IF EXISTS `agrees`;
 CREATE TABLE `agrees` (
@@ -61,7 +60,7 @@ INSERT INTO `agrees` VALUES ('5', '95108', '4', null);
 INSERT INTO `agrees` VALUES ('6', '95827', '5', null);
 
 -- ----------------------------
--- Table structure for books
+-- Table structure for `books`
 -- ----------------------------
 DROP TABLE IF EXISTS `books`;
 CREATE TABLE `books` (
@@ -111,7 +110,7 @@ INSERT INTO `books` VALUES ('t137', 'jquery经典', 'imgs/book-xiyouji.jpg', '�
 INSERT INTO `books` VALUES ('t138', 'JavaScript高级程序设计第三版', 'imgs/book-xiyouji.jpg', '莫言', '机械工业出版社', '0000-00-00', null, '英文', '', null, '', '', '', '2', '', '2017-04-12', 'zz', '');
 
 -- ----------------------------
--- Table structure for category
+-- Table structure for `category`
 -- ----------------------------
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
@@ -136,7 +135,7 @@ INSERT INTO `category` VALUES ('9', '动物世界', null);
 INSERT INTO `category` VALUES ('10', '心理学123', null);
 
 -- ----------------------------
--- Table structure for default
+-- Table structure for `default`
 -- ----------------------------
 DROP TABLE IF EXISTS `default`;
 CREATE TABLE `default` (
@@ -156,7 +155,7 @@ INSERT INTO `default` VALUES ('楼层数', '12');
 INSERT INTO `default` VALUES ('书架数', '60');
 
 -- ----------------------------
--- Table structure for eachbooks
+-- Table structure for `eachbooks`
 -- ----------------------------
 DROP TABLE IF EXISTS `eachbooks`;
 CREATE TABLE `eachbooks` (
@@ -177,10 +176,10 @@ CREATE TABLE `eachbooks` (
 -- Records of eachbooks
 -- ----------------------------
 INSERT INTO `eachbooks` VALUES ('614933599984', '61493359998', '6', '15', 'B面1-2', '在馆', null);
-INSERT INTO `eachbooks` VALUES ('614933599987', '61493359998', '4', '14', 'A面4-5', '在馆', null);
+INSERT INTO `eachbooks` VALUES ('614933599987', '61493359998', '4', '14', 'A面4-5', '已借出', null);
 INSERT INTO `eachbooks` VALUES ('t1232', 't123', '7', '18', 'A面5-6', '预约中', null);
 INSERT INTO `eachbooks` VALUES ('t1241', 't124', '1', '22', 'A面5-6', '预约中', null);
-INSERT INTO `eachbooks` VALUES ('t1251', 't125', '6', '22', 'A面5-6', '预约中', '');
+INSERT INTO `eachbooks` VALUES ('t1251', 't125', '6', '22', 'A面5-6', '已借出', '');
 INSERT INTO `eachbooks` VALUES ('t1262', 't126', '1', '22', 'A面5-6', '在馆', '');
 INSERT INTO `eachbooks` VALUES ('t1271', 't127', '1', '22', 'A面5-6', '在馆', '');
 INSERT INTO `eachbooks` VALUES ('t1281', 't128', '1', '22', 'A面5-6', '在馆', '');
@@ -195,24 +194,7 @@ INSERT INTO `eachbooks` VALUES ('t1372', 't137', '1', '22', 'A面5-6', '在馆',
 INSERT INTO `eachbooks` VALUES ('t1381', 't138', '1', '22', 'A面5-6', '在馆', '');
 
 -- ----------------------------
--- Table structure for floors
--- ----------------------------
-DROP TABLE IF EXISTS `floors`;
-CREATE TABLE `floors` (
-  `floorId` int(11) NOT NULL AUTO_INCREMENT,
-  `floorName` varchar(100) NOT NULL,
-  `shelf` int(11) NOT NULL,
-  `memo` text,
-  PRIMARY KEY (`floorId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of floors
--- ----------------------------
-INSERT INTO `floors` VALUES ('1', '一楼', '50', null);
-
--- ----------------------------
--- Table structure for loginfo
+-- Table structure for `loginfo`
 -- ----------------------------
 DROP TABLE IF EXISTS `loginfo`;
 CREATE TABLE `loginfo` (
@@ -223,7 +205,7 @@ CREATE TABLE `loginfo` (
   PRIMARY KEY (`logId`),
   KEY `asdasd` (`studentId`),
   CONSTRAINT `asdasd` FOREIGN KEY (`studentId`) REFERENCES `students` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of loginfo
@@ -270,9 +252,14 @@ INSERT INTO `loginfo` VALUES ('62', '95827', '2017-04-24 04:29:10', '');
 INSERT INTO `loginfo` VALUES ('63', '95827', '2017-04-24 08:27:28', '');
 INSERT INTO `loginfo` VALUES ('64', '95827', '2017-04-24 08:31:51', '');
 INSERT INTO `loginfo` VALUES ('65', '95827', '2017-04-24 09:03:20', '');
+INSERT INTO `loginfo` VALUES ('66', '95827', '2017-05-02 03:53:39', '');
+INSERT INTO `loginfo` VALUES ('67', '95827', '2017-05-02 05:32:51', '');
+INSERT INTO `loginfo` VALUES ('68', '95827', '2017-05-02 05:50:28', '');
+INSERT INTO `loginfo` VALUES ('69', '95827', '2017-05-02 07:34:59', '');
+INSERT INTO `loginfo` VALUES ('70', '95827', '2017-05-02 08:28:03', '');
 
 -- ----------------------------
--- Table structure for news
+-- Table structure for `news`
 -- ----------------------------
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE `news` (
@@ -317,36 +304,22 @@ INSERT INTO `news` VALUES ('30', '123', '123123123', '2017-04-27', 'imgs/2.png',
 INSERT INTO `news` VALUES ('31', '32', '<p>12</p>', '2017-04-27', null, '新闻通知', 'zz', null);
 
 -- ----------------------------
--- Table structure for options
--- ----------------------------
-DROP TABLE IF EXISTS `options`;
-CREATE TABLE `options` (
-  `image` varchar(100) DEFAULT NULL,
-  `footer` text,
-  `memo` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of options
--- ----------------------------
-
--- ----------------------------
--- Table structure for orders
+-- Table structure for `orders`
 -- ----------------------------
 DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `orderId` int(11) NOT NULL AUTO_INCREMENT,
-  `studentsId` varchar(100) NOT NULL,
+  `studentId` varchar(100) NOT NULL,
   `eachId` varchar(100) DEFAULT NULL,
   `orderDate` date NOT NULL,
   `orderType` varchar(100) NOT NULL,
   `memo` text,
   PRIMARY KEY (`orderId`),
-  KEY `ddd` (`studentsId`),
+  KEY `ddd` (`studentId`),
   KEY `xxxxx` (`eachId`),
-  CONSTRAINT `ddd` FOREIGN KEY (`studentsId`) REFERENCES `students` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `ddd` FOREIGN KEY (`studentId`) REFERENCES `students` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `xxxxx` FOREIGN KEY (`eachId`) REFERENCES `eachbooks` (`eachId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of orders
@@ -354,44 +327,10 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` VALUES ('1', '95827', 't1232', '2017-01-15', '已取消', null);
 INSERT INTO `orders` VALUES ('6', '95827', 't1232', '2017-04-20', '生效中', null);
 INSERT INTO `orders` VALUES ('8', '95827', 't1241', '2017-04-21', '生效中', null);
-INSERT INTO `orders` VALUES ('9', '95827', 't1251', '2017-04-21', '生效中', null);
+INSERT INTO `orders` VALUES ('9', '95827', 't1251', '2017-04-21', '已借', null);
 
 -- ----------------------------
--- Table structure for owe
--- ----------------------------
-DROP TABLE IF EXISTS `owe`;
-CREATE TABLE `owe` (
-  `oweId` int(11) NOT NULL AUTO_INCREMENT,
-  `recordId` int(100) NOT NULL,
-  `season` text NOT NULL,
-  `oweMoney` float NOT NULL,
-  `repay` float NOT NULL,
-  `oweDate` date NOT NULL,
-  `memo` text,
-  PRIMARY KEY (`oweId`),
-  KEY `asdasdasd` (`recordId`),
-  CONSTRAINT `asdasdasd` FOREIGN KEY (`recordId`) REFERENCES `records` (`recordId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of owe
--- ----------------------------
-INSERT INTO `owe` VALUES ('16', '6', '所借书籍超期', '0.5', '0.5', '2017-01-17', null);
-INSERT INTO `owe` VALUES ('17', '9', '所借书籍超期', '0.1', '0.1', '2017-01-18', null);
-INSERT INTO `owe` VALUES ('19', '12', '所借书籍超期', '0.5', '0.5', '2017-01-17', null);
-INSERT INTO `owe` VALUES ('20', '13', '所借书籍超期', '0.1', '0.1', '2017-01-18', null);
-INSERT INTO `owe` VALUES ('21', '15', '所借书籍超期', '6.1', '6.1', '2017-04-19', null);
-INSERT INTO `owe` VALUES ('22', '17', '所借书籍超期', '0.5', '0.5', '2017-01-17', null);
-INSERT INTO `owe` VALUES ('23', '18', '所借书籍超期', '0.1', '0.1', '2017-01-18', null);
-INSERT INTO `owe` VALUES ('24', '21', '所借书籍超期', '0.5', '0.5', '2017-01-17', null);
-INSERT INTO `owe` VALUES ('25', '22', '所借书籍超期', '0.1', '0.1', '2017-01-18', null);
-INSERT INTO `owe` VALUES ('26', '10', '所借书籍超期', '6', '6', '2017-03-20', null);
-INSERT INTO `owe` VALUES ('27', '14', '所借书籍超期', '7.5', '7.5', '2017-04-05', null);
-INSERT INTO `owe` VALUES ('28', '19', '所借书籍超期', '3.5', '3.5', '2017-02-23', null);
-INSERT INTO `owe` VALUES ('29', '23', '所借书籍超期', '3.5', '3.5', '2017-02-23', null);
-
--- ----------------------------
--- Table structure for recommends
+-- Table structure for `recommends`
 -- ----------------------------
 DROP TABLE IF EXISTS `recommends`;
 CREATE TABLE `recommends` (
@@ -415,13 +354,13 @@ CREATE TABLE `recommends` (
 -- ----------------------------
 -- Records of recommends
 -- ----------------------------
-INSERT INTO `recommends` VALUES ('1', '95827', 'javascript从入门到放弃', '雷迪嘎嘎', '英文', '123-456-789-123', '这这本书啊非常的好这本书啊非常的好本书啊非常的这这本书啊非常的好这本书啊非常的好本书啊非常的好这这本书啊非常的好这本书啊非常的好本书啊非常的好好', '人民出版社', '2017-01-18', '2', '未购买', null);
+INSERT INTO `recommends` VALUES ('1', '95827', 'javascript从入门到放弃', '雷迪嘎嘎', '英文', '123-456-789-123', '这这本书啊非常的好这本书啊非常的好本书啊非常的这这本书啊非常的好这本书啊非常的好本书啊非常的好这这本书啊非常的好这本书啊非常的好本书啊非常的好好', '人民出版社', '2017-01-18', '2', '已购买', null);
 INSERT INTO `recommends` VALUES ('3', '95827', '浅谈css', '泵下卡拉卡', '中文', '456-14231-132', '这这本书啊非常的好这本书啊非常的好本书啊非常的这这本书啊非常的好这本书啊非常的好本书啊非常的好这这本书啊非常的好这本书啊非常的好本书啊非常的好好', '上海出版社', '2017-01-17', '0', '已购买', null);
 INSERT INTO `recommends` VALUES ('4', '95827', 'javascript从入门到放弃', '雷迪嘎嘎', '英文', '123-456-789-123', '这这本书啊非常的好这本书啊非常的好本书啊非常的这这本书啊非常的好这本书啊非常的好本书啊非常的好这这本书啊非常的好这本书啊非常的好本书啊非常的好好', '人民出版社', '2017-01-18', '2', '未购买', '');
 INSERT INTO `recommends` VALUES ('5', '95108', '红楼梦', '施耐庵', null, '1123-45664-213', '去玩儿退欧浦自行车VB你们爱上对方过后就哭了', '北京出版社', '2017-01-18', '2', '未购买', null);
 
 -- ----------------------------
--- Table structure for records
+-- Table structure for `records`
 -- ----------------------------
 DROP TABLE IF EXISTS `records`;
 CREATE TABLE `records` (
@@ -438,7 +377,7 @@ CREATE TABLE `records` (
   KEY `cccc` (`eachId`),
   CONSTRAINT `c` FOREIGN KEY (`studentId`) REFERENCES `students` (`studentId`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `cccc` FOREIGN KEY (`eachId`) REFERENCES `eachbooks` (`eachId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of records
@@ -460,9 +399,12 @@ INSERT INTO `records` VALUES ('20', '95827', 't1351', '2016-12-01', '2017-01-17'
 INSERT INTO `records` VALUES ('21', '95827', 't1322', '2016-11-24', '2017-01-12', '2017-01-17', '2', '');
 INSERT INTO `records` VALUES ('22', '95827', 't1331', '2016-12-22', '2017-01-17', '2017-01-18', '2', '');
 INSERT INTO `records` VALUES ('23', '95108', 't1351', '2017-01-19', '2017-01-19', '2017-02-23', '0', '');
+INSERT INTO `records` VALUES ('34', '9555', '614933599984', '2017-05-02', '2017-06-01', '2017-05-02', '0', null);
+INSERT INTO `records` VALUES ('35', '9555', '614933599987', '2017-05-02', '2017-06-02', null, '0', null);
+INSERT INTO `records` VALUES ('36', '95827', 't1251', '2017-05-02', '2017-06-02', null, '0', null);
 
 -- ----------------------------
--- Table structure for students
+-- Table structure for `students`
 -- ----------------------------
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
@@ -482,7 +424,7 @@ CREATE TABLE `students` (
 -- ----------------------------
 -- Records of students
 -- ----------------------------
-INSERT INTO `students` VALUES ('95108', '崽崽z', '123456z', 'imgs/4.jpg', '123z@11.com', '重庆理工z大学花溪校区', '123456z', '15178744811z', '0', null);
+INSERT INTO `students` VALUES ('95108', '崽崽z', '123456z', 'imgs/4.jpg', '123z@11.com', '重庆理工z大学花溪校区', '123456z', '15178744811z', '10', null);
 INSERT INTO `students` VALUES ('9555', '昵好', 'weishuangjian', 'imgs/nav6.png', '', '', '', '', '0', null);
 INSERT INTO `students` VALUES ('95827', '昵好', '123456', 'imgs/timg.jpg', '1607074855@qq.com', '重庆理工大学', '1607074855', '15310274364', '0', null);
-INSERT INTO `students` VALUES ('t123', '图解CSS3', '', '', '', '', '', '', '0', null);
+INSERT INTO `students` VALUES ('qq', 'qqq', 'qqqqqq', '', '', '', '', '', '0', null);

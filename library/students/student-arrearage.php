@@ -9,16 +9,22 @@
 </head>
 <body>
 	<?php 
-		error_reporting(0); // 不显示警告
+		// error_reporting(0); // 不显示警告
 		include 'student-master.php';
 
+		// 从默认表里获取到超期每天的费用
+		$price = $db->getSingleData('select value_ from `default` where key_ = "超期单价"');
+
 		// 获取当前登陆学生的欠费总数和缴费总数
-		$oweDetail = $db->getSingleData('select sum(repay) from owe join records on records.recordId = owe.recordId where records.studentId = "'.$_SESSION['user'].'"');
+		$oweDetail = $db->getSingleData('select sum(timestampdiff(DAY, destine, endDate)) from records join students on students.studentId = records.studentId where endDate > destine and students.studentId = "'.$_SESSION['user'].'"');
+		$oweDetail *= $price;
 
 		$money = $db->getSingleData('select money from students where studentId = "'.$_SESSION['user'].'"');
 
 		// 获取当前学生的所有欠款记录的总数--用于分页
-		$counts = $db->getNum('select * from owe join records on records.recordId = owe.recordId where records.studentId = "'.$_SESSION['user'].'"');
+		$sqlOwe = 'select *, timestampdiff(DAY, destine, endDate) as diff from records join students on students.studentId = records.studentId join eachbooks on eachbooks.eachId = records.eachId join books on books.booksId = eachbooks.booksId where endDate is not null and endDate > destine and students.studentId = "'.$_SESSION['user'].'"';
+
+		$counts = $db->getNum($sqlOwe);
 		$onePage = 16 > $counts ? $counts : 16; // 一页显示16条记录
 		$allPages = $onePage == 0 ? 1 : ceil($counts / $onePage); // 总页数
 
@@ -30,10 +36,7 @@
 		}
 
 		// 获取当前学生指定长度的欠款记录sql
-		$logSql = 'select * from owe join records on records.recordId = owe.recordId'
-					.' join eachbooks on eachbooks.eachId = records.eachId'
-					.' join books on books.booksId = eachbooks.booksId'
-					.' where records.studentId = "'.$_SESSION['user'].'"';
+		$logSql = $sqlOwe;
 
 		$sortStr = ''; // 存储url上的sort和sortType链接
 
@@ -84,20 +87,14 @@
 					<div class="mytable-th-td mytable-th-td-large" alt="bookName">
 						欠款书籍名<i class="mytable-th-td-icon"></i>
 					</div>
-					<div class="mytable-th-td" alt="oweDate">
+					<div class="mytable-th-td" alt="endDate">
 						欠款时间<i class="mytable-th-td-icon"></i>
 					</div>
-					<div class="mytable-th-td" alt="oweMoney">
+					<div class="mytable-th-td" alt="diff">
 						欠款金额<i class="mytable-th-td-icon"></i>
 					</div>
-					<div class="mytable-th-td" alt="(oweMoney-repay)">
-						减免金额<i class="mytable-th-td-icon"></i>
-					</div>
-					<div class="mytable-th-td" alt="repay">
-						应付金额<i class="mytable-th-td-icon"></i>
-					</div>
-					<div class="mytable-th-td mytable-th-td-large" alt="season">
-						欠款原因<i class="mytable-th-td-icon"></i>
+					<div class="mytable-th-td mytable-th-td-large">
+						欠款原因
 					</div>
 				</div>
 				<?php 
@@ -106,11 +103,11 @@
 				<div class="mytable-tr">
 					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['eachId'];?></div>
 					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['bookName'];?></div>
-					<div class="mytable-tr-td"><?php echo $infos[$i]['oweDate'];?></div>
-					<div class="mytable-tr-td">￥<?php echo number_format($infos[$i]['oweMoney'], 2);?></div> <!-- number_format 保留两位小数 -->
-					<div class="mytable-tr-td">￥<?php echo number_format($infos[$i]['oweMoney'] - $infos[$i]['repay'], 2)?></div>
-					<div class="mytable-tr-td">￥<?php echo number_format($infos[$i]['repay'], 2);?></div>
-					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['season'];?></div>
+					<div class="mytable-tr-td"><?php echo $infos[$i]['endDate'];?></div>
+					<div class="mytable-tr-td">￥<?php 
+						echo number_format($infos[$i]['diff'] * $price, 2);
+					?></div> <!-- number_format 保留两位小数 -->
+					<div class="mytable-tr-td mytable-th-td-large">书籍借阅超期</div>
 				</div>
 				<?php
 					}

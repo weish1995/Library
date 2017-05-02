@@ -109,7 +109,7 @@
 					for ($i = 0; $i < count($infos); $i++) {
 				?>
 				<div class="mytable-tr">
-					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['bookName'];?></div>
+					<div class="mytable-tr-td mytable-th-td-large bookName"><?php echo $infos[$i]['bookName'];?></div>
 					<div class="mytable-tr-td"><?php echo $infos[$i]['press'];?></div>
 					<div class="mytable-tr-td mytable-th-td-large"><?php echo $infos[$i]['author'];?></div>
 					<div class="mytable-tr-td" alt="<?php echo $infos[$i]['reason'];?>">

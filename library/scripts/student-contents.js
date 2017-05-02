@@ -66,26 +66,11 @@ $('.mytable-th-td').on('click', function() {
 	top.location = $urlAddr;
 });
 
-
-/* student-current.php 当前借阅页面 */
-$('.current-table-renew').on('click', function(e) {
-	if (!confirm('确认要续借吗?')) { // 弹出框点击的是“否”，则阻止链接跳转
-		e.preventDefault();
-	}
-});
-
-/* 删除询问 */
-$('.delete').on('click', function(e) {
-	if (!confirm('确认要删除吗?')) { // 弹出框点击的是“否”，则阻止链接跳转
-		e.preventDefault();
-	}
-});
-
 /* student-recomment.php 我的推荐页面 */
 // 查看详情
 $('.click-detail').on('click', function() {
 	var $reason = $(this).parent().attr('alt'), // 理由 存储在li，即它的父元素的alt属性里面
-		$bookName = $(this).parent().prevAll('.mytable-th-td-large').html(); // 获取书籍名
+		$bookName = $(this).parent().prevAll('.bookName').html(); // 获取书籍名
 
 	$('.pop-content-item-reson').html($reason); // 将.pop-content-item-reson的内容替换成$reason
 	$('.pop-content-item-book').html($bookName);
@@ -93,12 +78,6 @@ $('.click-detail').on('click', function() {
 	$('.pop-wrap').slideDown(800); // 用时800ms，展开.pop-wrap
 });
 
-/* student-recomall.php 推荐页面 */
-$('.recomall-table-agree').on('click', function(e) {
-	if (!confirm('确认要推荐吗？')) { // 弹出框点击的是“否”，则阻止链接跳转
-		e.preventDefault();
-	}
-});
 
 /* student-new-recomment.php 添加推荐页面 */
 $('.wrap-new-recom').on('submit', function() {
@@ -125,9 +104,37 @@ $('.wrap-new-recom').on('submit', function() {
 	return true;
 });
 
+/* student-current.php 当前借阅页面 */
+$('.current-table-renew').on('click', function(e) {
+	if (!confirm('确认要续借吗?')) { // 弹出框点击的是“否”，则阻止链接跳转
+		e.preventDefault();
+	}
+});
+
+/* 删除询问 */
+$('.delete').on('click', function(e) {
+	if (!confirm('确认要删除吗?')) { // 弹出框点击的是“否”，则阻止链接跳转
+		e.preventDefault();
+	}
+});
+
+/* student-recomall.php 推荐页面 */
+$('.recomall-table-agree').on('click', function(e) {
+	if (!confirm('确认要推荐吗？')) { // 弹出框点击的是“否”，则阻止链接跳转
+		e.preventDefault();
+	}
+});
+
 /* student-order.php 预约记录页面 */
 $('.order-table-cancel').on('click', function(e) {
 	if (!confirm('确认要取消预约吗?')) { // 弹出框点击的是“否”，则阻止链接跳转
+		e.preventDefault();
+	}
+});
+
+/* admin-comm.php 页面 */
+$('.buy').on('click', function(e) {
+	if (!confirm('确定将状态更换为已购买吗?')) { // 弹出框点击的是“否”，则阻止链接跳转
 		e.preventDefault();
 	}
 });

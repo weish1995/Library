@@ -80,6 +80,12 @@
 							<span>图书管理</span>
 						</a>
 					</li>
+					<li>
+						<a href="admin-comm.php">
+							<i class="header-menu-icon header-menu-icon-comm"></i>
+							<span>书籍推荐</span>
+						</a>
+					</li>
 				</ul>
 			</li>
 			<li class="header-menu-cate">
@@ -117,7 +123,7 @@
 <div class="pop-wrap">
 	<div class="pop-content">
 		<i class="pop-close"></i>
-		<div class="pop-content-item">书籍：<span class="pop-content-item-book">《JavaScript从入门到放弃》</span></div>
-		<div class="pop-content-item">理由：<span class="pop-content-item-reson">啊实打实大所大所大所多高合金钢尔特让他风格和豆腐干从V型的CVS的方式啊实打实大所大所大所多高合金钢尔特让他风格和豆腐干从V型的CVS的方式啊实打实大所大所大所多高合金钢尔特让他风格和豆腐干从V型的CVS的方式啊实打实大所大所大所多高合金钢尔特让他风格和豆腐干从V型的CVS的方式</span></div>
+		<div class="pop-content-item">书籍：<span class="pop-content-item-book"></span></div>
+		<div class="pop-content-item">理由：<span class="pop-content-item-reson"></span></div>
 	</div>
 </div>

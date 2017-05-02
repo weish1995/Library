@@ -67,7 +67,7 @@
 				$sqlinfo = "update books set bookName = '".$_POST['txtName']."', author = '".$_POST['txtAuthor']."', img = '".$img."', press='".$_POST['txtPress']."', pressDate = '".$_POST['txtPressDate']."', pages = ".$_POST['txtPages'].", language = '".$_POST['selLang']."', ibsn = '".$_POST['txtIbsn']."', price = '".$_POST['txtPrice']."', theme = '".$_POST['txtTheme']."', series = '".$_POST['txtSeries']."', summary = '".$_POST['txtSummary']."', cateId = ".$_POST['selCate'].", keyword = '".$_POST['txtKeyword']."', inputDate = '".date("Y-m-d", time())."', adminId = '".$_SESSION['user']."' where booksId = '".$booksId."'";
 			} else {
 				// 添加书籍的sql语句
-				$booksId = $_POST['selCate'].substr(time(), 5, sizeof(time()) - 5); // 类别id+时戳后四位 生成id
+				$booksId = time(); // 时戳 生成id
 				$sqlinfo = "insert into books (booksId, bookName, author, img, press, pressDate, pages, language, ibsn, price, theme, series, summary, cateId, keyword, inputDate, adminId) values ('".$booksId."', '".$_POST['txtName']."', '".$_POST['txtAuthor']."', '".$img."', '".$_POST['txtPress']."', '".$_POST['txtPressDate']."', '".$_POST['txtPages']."', '".$_POST['selLang']."', '".$_POST['txtIbsn']."', ".$_POST['txtPrice'].", '".$_POST['txtTheme']."', '".$_POST['txtSeries']."', '".$_POST['txtSummary']."', '".$_POST['selCate']."', '".$_POST['txtKeyword']."', '".date('Y-m-d', time())."', '".$_SESSION['user']."')";
 			}
 
