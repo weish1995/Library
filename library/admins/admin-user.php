@@ -9,7 +9,6 @@
 </head>
 <body>
 	<?php
-		error_reporting(0);
 		include 'admin-master.php';
 
 		// 删除
@@ -159,8 +158,8 @@
 						<?php echo number_format($infos[$i]['money'], 2);;?>
 					</div>
 					<div class="mytable-tr-td">
-						<a class="delete" href="admin-user.php?deleteId=<?php echo $infos[$i]['studentId'];?>">删除</a>
-						<a href="admin-user-edit.php?studentId=<?php echo $infos[$i]['studentId'];?>">编辑(缴费)</a>
+						<a class="icon-op delete" title="删除" href="admin-user.php?deleteId=<?php echo $infos[$i]['studentId'];?>">删除</a>
+						<a class="icon-op edit" title="编辑(缴费)" href="admin-user-edit.php?studentId=<?php echo $infos[$i]['studentId'];?>">编辑(缴费)</a>
 					</div>
 				</div>
 				<?php

@@ -97,18 +97,19 @@
 						<?php echo $infos[$i]['status'];?>
 					</div>
 					<div class="mytable-tr-td mytable-th-td-large">
-						<a class="delete" href="admin-eachbooks.php?deleteId=<?php echo $infos[$i]['eachId'].'&booksId='.$_GET['booksId'];?>">删除</a>
-						<a href="admin-eachbooks-edit.php?eachId=<?php echo $infos[$i]['eachId'].'&booksId='.$_GET['booksId'];?>">编辑</a>
-						<a class="lend" href="admin-eachbooks-lend.php?eachId=<?php echo $infos[$i]['eachId']?>">
-							<?php
+						<a class="icon-op delete" title="删除" href="admin-eachbooks.php?deleteId=<?php echo $infos[$i]['eachId'].'&booksId='.$_GET['booksId'];?>">删除</a>
+						<a class="icon-op edit" title="编辑" href="admin-eachbooks-edit.php?eachId=<?php echo $infos[$i]['eachId'].'&booksId='.$_GET['booksId'];?>">编辑</a>
+						<?php
 								if ($infos[$i]['status'] == "在馆" || $infos[$i]['status'] == "预约中") {
-									echo '借书';
+									$lendStr = '借书';
+									$lendClass = 'lend';
 								}
 								if ($infos[$i]['status'] == "已借出") {
-									echo '还书';
+									$lendStr = '还书';
+									$lendClass = 'back';
 								}
 							?>
-						</a>
+						<a class="icon-op <?php echo $lendClass;?>" title="<?php echo $lendStr;?>" href="admin-eachbooks-lend.php?eachId=<?php echo $infos[$i]['eachId']?>"><?php echo $lendStr;?></a>
 					</div>
 				</div>
 				<?php

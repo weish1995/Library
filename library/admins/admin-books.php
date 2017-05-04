@@ -155,9 +155,9 @@
 						<?php echo $infos[$i]['adminName'];?>
 					</div>
 					<div class="mytable-tr-td mytable-th-td-large">
-						<a class="delete" href="admin-books.php?deleteId=<?php echo $infos[$i]['booksId'];?>">删除</a>
-						<a href="admin-books-edit.php?booksId=<?php echo $infos[$i]['booksId'];?>">编辑</a>
-						<a href="admin-eachbooks.php?booksId=<?php echo $infos[$i]['booksId'];?>">详情书籍</a>
+						<a class="icon-op delete" title="删除" href="admin-books.php?deleteId=<?php echo $infos[$i]['booksId'];?>">删除</a>
+						<a class="icon-op edit" title="编辑" href="admin-books-edit.php?booksId=<?php echo $infos[$i]['booksId'];?>">编辑</a>
+						<a class="icon-op bookdetail" title="详细书籍" href="admin-eachbooks.php?booksId=<?php echo $infos[$i]['booksId'];?>">详情书籍</a>
 					</div>
 				</div>
 				<?php

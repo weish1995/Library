@@ -129,8 +129,8 @@
 						<?php echo $infos[$i]['adminName'];?>
 					</div>
 					<div class="mytable-tr-td">
-						<a class="delete" href="admin-download.php?deleteId=<?php echo $infos[$i]['newId'];?>">删除</a>
-						<a href="admin-download-edit.php?id=<?php echo $infos[$i]['newId'];?>">编辑</a>
+						<a class="icon-op delete" title="删除" href="admin-download.php?deleteId=<?php echo $infos[$i]['newId'];?>">删除</a>
+						<a class="icon-op edit" title="编辑" href="admin-download-edit.php?id=<?php echo $infos[$i]['newId'];?>">编辑</a>
 					</div>
 				</div>
 				<?php

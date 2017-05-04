@@ -170,7 +170,7 @@
 					<div class="mytable-tr-td">
 						<?php
 							if ($infos[$i]['recomType'] == '未购买') {
-								echo '<a class="buy" href="admin-comm.php?buyId='.$infos[$i]['recomId'].'">购买</a>';
+								echo '<a class="icon-op buy" title="购买" href="admin-comm.php?buyId='.$infos[$i]['recomId'].'">购买</a>';
 							}
 						?>
 					</div>

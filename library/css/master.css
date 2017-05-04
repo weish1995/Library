@@ -329,6 +329,40 @@ body {
 	background-color: #367faa;
 }
 
+/* 修改项 */
+.icon-op {
+	display: inline-block;
+	margin-left: 15px;
+	width: 20px;
+	height: 20px;
+	font-size: 0 !important;
+	background-size: cover;
+}
+
+.icon-op.delete {
+	background-image: url("../imgs/icon-delete.png");
+}
+
+.icon-op.edit {
+	background-image: url("../imgs/icon-revise.png");
+}
+
+.icon-op.bookdetail {
+	background-image: url("../imgs/icon-bookdetail.png");
+}
+
+.icon-op.lend {
+	background-image: url("../imgs/icon-lend.png");
+}
+
+.icon-op.back {
+	background-image: url("../imgs/icon-back.png");
+}
+
+.icon-op.buy {
+	background-image: url("../imgs/icon-shopcar.png");
+}
+
 /* 必填 */
 .require {
 	color: #f00;
@@ -495,9 +529,3 @@ body {
 	font-size: 13px;
 	font-weight: 400;
 }
-
-/* 富文本控件 */
-/*.container {
-	width: 90%;
-	height: 00px;
-}*/

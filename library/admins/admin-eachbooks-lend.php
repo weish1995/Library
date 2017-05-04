@@ -46,7 +46,7 @@
 
 			// 借出之后只能查看信息 不能再进行借书操作
 			if ($status == '已借出') {
-				$lendInfo = $db->getData('select * from records where eachId = "'.$eachId.'"')[0];
+				$lendInfo = $db->getData('select * from records where eachId = "'.$eachId.'" and endDate is null')[0];
 				$studentId = $lendInfo['studentId'];
 				$date = $lendInfo['startDate'];
 				$textDis = 'disabled';
@@ -63,6 +63,7 @@
 			}
 
 			$sqlLend = 'insert into records (studentId, eachId, startDate, destine, renew) values ("'.$studentId.'", "'.$eachId.'", "'.date('Y-m-d', time()).'", "'.date('Y-m-d', strtotime("+1 months", time())).'", 0)';
+			echo $sqlLend;
 
 			// 更改书籍状态
 			$sqlCh = 'update eachbooks set status = "已借出" where eachId = "'.$eachId.'"';
